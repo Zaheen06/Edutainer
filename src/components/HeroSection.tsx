@@ -1,79 +1,124 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Users, BookOpen, Clock, Award, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-[600px] flex flex-col">
-      {/* Background image */}
-      <div className="relative flex-1 flex flex-col">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        >
-          <div className="absolute inset-0 bg-foreground/60" />
-        </div>
+  const stats = [
+    {
+      value: "100%",
+      label: "Placement Support",
+      description: "Real-world experience with top companies.",
+      icon: Award,
+    },
+    {
+      value: "50+",
+      label: "New Courses",
+      description: "Stay ahead with the latest tech trends.",
+      icon: BookOpen,
+    },
+    {
+      value: "24/7",
+      label: "Access",
+      description: "Learn at your own pace, anytime.",
+      icon: Clock,
+    },
+    {
+      value: "400+",
+      label: "Expert Instructors",
+      description: "Seasoned educators & industry leaders.",
+      icon: Users,
+    },
+  ];
 
-        <div className="relative container mx-auto px-4 pt-28 pb-16 flex-1 flex flex-col justify-between">
-          {/* 24/7 Access card */}
+  const features = [
+    "Flexible Learning",
+    "Expert Instructors",
+    "Industry Driven Internship",
+    "Cutting-Edge Courses",
+  ];
+
+  return (
+    <section className="relative pt-24 pb-20 bg-white overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-50/60 rounded-full blur-3xl opacity-60" />
+      </div>
+
+      <div className="container-custom relative">
+        {/* Hero Content */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-foreground/70 backdrop-blur-md rounded-xl p-6 max-w-sm border border-border/20"
+            transition={{ duration: 0.55 }}
           >
-            <h2 className="text-4xl font-bold text-primary-foreground">24/7</h2>
-            <h3 className="text-xl font-semibold text-primary-foreground">Access</h3>
-            <p className="text-sm text-primary-foreground/80 mt-2">
-              Learn at your own pace, anytime, anywhere.
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5 leading-[1.1] tracking-tight">
+              Learning for the{" "}
+              <span className="text-blue-600">Modern World</span>
+            </h1>
+            <p className="text-lg text-gray-500 mb-8 max-w-xl mx-auto leading-relaxed">
+              Reshaping education where accessibility and inclusivity meet real industry experience.
             </p>
           </motion.div>
 
-          {/* Feature bar */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-12 text-primary-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
           >
-            {[
-              "Flexible Learning",
-              "Expert Instructors",
-              "Industry Driven Internship",
-              "Cutting-Edge Courses",
-            ].map((item, i) => (
-              <span key={item} className="flex items-center gap-3 text-sm font-semibold">
-                {i > 0 && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
-                {item}
+            <Button size="lg" className="btn-primary px-8 h-12 rounded-xl text-sm font-semibold">
+              Explore Courses
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+            <Button size="lg" variant="outline" className="h-12 rounded-xl text-sm font-semibold px-8">
+              Learn More
+            </Button>
+          </motion.div>
+
+          {/* Feature tags */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.28 }}
+            className="flex flex-wrap justify-center gap-2"
+          >
+            {features.map((f) => (
+              <span
+                key={f}
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-gray-50 border border-gray-200 text-gray-600 text-sm font-medium rounded-full"
+              >
+                <CheckCircle className="w-3.5 h-3.5 text-blue-500" />
+                {f}
               </span>
             ))}
           </motion.div>
         </div>
-      </div>
 
-      {/* CTA section */}
-      <div className="bg-background">
-        <div className="container mx-auto px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-8"
-          >
-            <div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-foreground leading-tight">
-                Learning for the Modern<br />World
-              </h1>
-              <p className="text-muted-foreground mt-4 max-w-xl">
-                Reshaping Learning for the Modern World, where Education Meets Accessibility and Inclusivity.
-              </p>
-            </div>
-            <Button size="lg" className="gap-2 text-lg px-10 py-6 rounded-full">
-              Explore Courses <ArrowRight className="w-5 h-5" />
-            </Button>
-          </motion.div>
-        </div>
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.4 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-5"
+        >
+          {stats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div
+                key={stat.label}
+                className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 text-center hover:shadow-md transition-shadow duration-200 group"
+              >
+                <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-100 transition-colors duration-200">
+                  <Icon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1 tracking-tight">{stat.value}</div>
+                <div className="text-sm font-semibold text-gray-700 mb-1.5">{stat.label}</div>
+                <p className="text-xs text-gray-400 leading-snug">{stat.description}</p>
+              </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
