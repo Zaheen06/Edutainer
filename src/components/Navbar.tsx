@@ -1,136 +1,137 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const links = [
-    { label: "Courses", href: "/#courses" },
-    { label: "About Us", href: "/about" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Courses",    href: "/#courses" },
+    { label: "About Us",   href: "/about"    },
+    { label: "Contact Us", href: "/contact"  },
   ];
 
   return (
-    <nav 
-      className={`sticky top-0 z-[100] transition-all duration-300 ${
-        scrolled ? 'py-3' : 'py-4'
-      }`}
+    <nav
+      className="sticky top-0 z-[100] transition-all duration-300"
       style={{
-        backgroundColor: scrolled ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.98)',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 1px 0 #E5E7EB' : 'none'
+        background: scrolled
+          ? "rgba(255,255,255,0.82)"
+          : "rgba(255,255,255,0.96)",
+        backdropFilter: scrolled ? "blur(16px) saturate(180%)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px) saturate(180%)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(226,232,240,0.8)" : "1px solid transparent",
+        boxShadow: scrolled ? "0 1px 24px rgba(0,0,0,0.06)" : "none",
+        padding: scrolled ? "10px 0" : "14px 0",
       }}
     >
-      <div className="container-custom">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
+
           {/* Logo */}
-          <a href="/" className="flex items-center group">
-            <img 
-              src="/edu_logo.svg" 
-              alt="Edutainer Logo" 
-              className="h-8 w-auto transition-transform duration-300 group-hover:scale-110"
-              style={{ maxHeight: '32px' }}
+          <a href="/" className="flex items-center group flex-shrink-0">
+            <img
+              src="/edu_logo.svg"
+              alt="Edutainer"
+              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                className="relative px-4 py-2 text-[13.5px] font-medium text-gray-600 hover:text-blue-600 rounded-lg transition-colors duration-200 group"
               >
                 {link.label}
+                <span className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
               </a>
             ))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium"
-              onClick={() => window.location.href = '/signin'}
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex items-center gap-2">
+            <a
+              href="/signin"
+              className="px-4 py-2 text-[13.5px] font-medium text-gray-600 hover:text-blue-600 rounded-lg transition-colors duration-200"
             >
               Sign In
-            </Button>
-            <Button 
-              size="sm" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200"
-              onClick={() => window.location.href = '/register'}
+            </a>
+            <a
+              href="/register"
+              className="px-5 py-2 text-[13.5px] font-semibold text-white rounded-xl transition-all duration-200 hover:-translate-y-px hover:shadow-lg"
+              style={{
+                background: "linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)",
+                boxShadow: "0 2px 10px rgba(37,99,235,0.3)",
+              }}
             >
               Register
-            </Button>
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+            className="md:hidden p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation Drawer */}
-        <div
-          className={`md:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-2xl transform transition-transform duration-250 ease-in-out ${
-            mobileOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          style={{ top: scrolled ? '48px' : '56px', zIndex: 90 }}
-        >
-          <div className="p-6 space-y-4">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="justify-start text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-                onClick={() => window.location.href = '/signin'}
-              >
-                Sign In
-              </Button>
-              <Button 
-                size="sm" 
-                className="justify-start bg-blue-600 hover:bg-blue-700 text-white"
-                onClick={() => window.location.href = '/register'}
-              >
-                Register
-              </Button>
-            </div>
+      {/* Mobile drawer */}
+      <div
+        className={`md:hidden fixed inset-y-0 right-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        style={{ top: scrolled ? "49px" : "57px", zIndex: 90, borderLeft: "1px solid #F1F5F9" }}
+      >
+        <div className="p-6 space-y-1">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="block px-4 py-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <div className="flex flex-col gap-2 pt-5 border-t border-gray-100 mt-4">
+            <a
+              href="/signin"
+              className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 text-center"
+            >
+              Sign In
+            </a>
+            <a
+              href="/register"
+              className="px-4 py-2.5 text-sm font-semibold text-white rounded-xl text-center transition-all duration-200"
+              style={{ background: "linear-gradient(135deg, #2563EB, #4F46E5)" }}
+            >
+              Register
+            </a>
           </div>
         </div>
-
-        {/* Mobile Overlay */}
-        {mobileOpen && (
-          <div
-            className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm"
-            style={{ top: scrolled ? '48px' : '56px', zIndex: 80 }}
-            onClick={() => setMobileOpen(false)}
-          />
-        )}
       </div>
+
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm"
+          style={{ top: scrolled ? "49px" : "57px", zIndex: 80 }}
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
     </nav>
   );
 };

@@ -33,16 +33,13 @@ const TestimonialsSection = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center mb-14">
-          <span 
-            className="inline-block px-4 py-2 bg-[#EFF6FF] text-[#2563EB] text-xs font-semibold rounded-full mb-6"
-            style={{ letterSpacing: '0.05em', textTransform: 'uppercase' }}
-          >
+          <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-full mb-5 uppercase tracking-[0.1em]">
             Student Success Stories
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 leading-tight">
+          <h2 className="text-3xl md:text-[2.6rem] font-bold text-gray-900 mb-4 leading-[1.1]" style={{ letterSpacing: "-0.025em" }}>
             What Our Edutainees Say
           </h2>
-          <p className="text-base text-[#64748B] max-w-2xl mx-auto leading-[1.7]">
+          <p className="text-base text-gray-500 max-w-lg mx-auto leading-[1.7]">
             Real stories from students who transformed their careers with our programs
           </p>
         </div>

@@ -1,6 +1,6 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import vtuCollab from "@/assets/vtu-collab.jpg";
+const vtuCollab = "/collaboration-vtu.png";
 
 const highlights = [
   "Skill-based learning curriculum",
@@ -11,26 +11,27 @@ const highlights = [
 
 const VTUSection = () => {
   return (
-    <section className="py-20 md:py-24 bg-white">
+    <section className="py-24 lg:py-28 bg-white">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Image Column */}
           <div className="flex justify-center">
-            <div 
-              className="w-full max-w-md rounded-[20px] bg-white p-6"
-              style={{ 
-                border: '1px solid #E2E8F0',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(37,99,235,0.05)',
-                background: 'linear-gradient(135deg, #EFF6FF, #DBEAFE)'
+            <div
+              className="w-full max-w-md rounded-xl bg-white p-8"
+              style={{
+                border: '1px solid var(--border-color)',
+                boxShadow: 'var(--shadow-md)',
+                background: 'linear-gradient(135deg, var(--color-gray-50), var(--color-primary-light))'
               }}
             >
-              <div className="flex items-center justify-center h-[240px] bg-white rounded-xl">
+              <div className="flex items-center justify-center h-[260px] bg-white rounded-xl">
                 <img
                   src={vtuCollab}
                   alt="Edutainer and VTU collaboration"
                   className="max-h-full w-auto object-contain"
                   loading="lazy"
+                  style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }}
                 />
               </div>
               {/* Mini stat strip inside image card */}

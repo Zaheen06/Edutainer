@@ -106,7 +106,7 @@ const courses: {
 ];
 
 const CATEGORIES: Category[] = ["All", "Development", "Design", "AI & Data", "Business"];
-const CARDS_PER_PAGE = 3;
+const CARDS_PER_PAGE = 4;
 
 const categoryColors: Record<Category, string> = {
   All: "bg-gray-100 text-gray-500",
@@ -119,6 +119,9 @@ const categoryColors: Record<Category, string> = {
 const CoursesSection = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [page, setPage] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDir, setSlideDir] = useState<"left" | "right">("left");
+  const [displayPage, setDisplayPage] = useState(0);
 
   const filtered =
     activeCategory === "All"
@@ -126,15 +129,37 @@ const CoursesSection = () => {
       : courses.filter((c) => c.category === activeCategory);
 
   const totalPages = Math.ceil(filtered.length / CARDS_PER_PAGE);
-  const visible = filtered.slice(page * CARDS_PER_PAGE, page * CARDS_PER_PAGE + CARDS_PER_PAGE);
+  const visible = filtered.slice(displayPage * CARDS_PER_PAGE, displayPage * CARDS_PER_PAGE + CARDS_PER_PAGE);
 
   const handleCategoryChange = (cat: Category) => {
     setActiveCategory(cat);
     setPage(0);
+    setDisplayPage(0);
   };
 
-  const handlePrev = () => setPage((p) => Math.max(0, p - 1));
-  const handleNext = () => setPage((p) => Math.min(totalPages - 1, p + 1));
+  const navigate = (dir: "left" | "right") => {
+    if (isAnimating) return;
+    const next = dir === "right"
+      ? Math.min(totalPages - 1, page + 1)
+      : Math.max(0, page - 1);
+    if (next === page) return;
+
+    setSlideDir(dir);
+    setIsAnimating(true);
+    setPage(next);
+
+    // After slide-out (half of 2s), swap content, then slide in
+    setTimeout(() => {
+      setDisplayPage(next);
+    }, 300);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 700);
+  };
+
+  const handlePrev = () => navigate("left");
+  const handleNext = () => navigate("right");
 
   return (
     <section id="courses" className="py-20 md:py-24 bg-white">
@@ -174,10 +199,10 @@ const CoursesSection = () => {
           {/* Left Arrow */}
           <button
             onClick={handlePrev}
-            disabled={page === 0}
+            disabled={page === 0 || isAnimating}
             aria-label="Previous courses"
             className={`hidden md:flex w-11 h-11 items-center justify-center rounded-full border bg-white transition-all duration-200 flex-shrink-0 ${
-              page === 0
+              page === 0 || isAnimating
                 ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
                 : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB] shadow-sm hover:shadow-md"
             }`}
@@ -187,7 +212,16 @@ const CoursesSection = () => {
           </button>
 
           {/* Course Cards Grid */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible scroll-smooth snap-x snap-mandatory md:snap-none">
+          <div
+            className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto md:overflow-visible"
+            style={{
+              transition: isAnimating ? 'opacity 0.3s ease, transform 0.3s ease' : 'opacity 0.4s ease, transform 0.4s ease',
+              opacity: isAnimating ? 0 : 1,
+              transform: isAnimating
+                ? `translateX(${slideDir === "right" ? "-40px" : "40px"})`
+                : "translateX(0)",
+            }}
+          >
             {visible.map((course) => (
               <div
                 key={course.title}
@@ -227,7 +261,7 @@ const CoursesSection = () => {
                 </div>
 
                 {/* Course Content */}
-                <div className="p-6 flex flex-col flex-1 gap-3">
+                <div className="p-5 flex flex-col flex-1 gap-3">
                   {/* Provider */}
                   <div className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-[#2563EB]" />
@@ -290,10 +324,10 @@ const CoursesSection = () => {
           {/* Right Arrow */}
           <button
             onClick={handleNext}
-            disabled={page >= totalPages - 1}
+            disabled={page >= totalPages - 1 || isAnimating}
             aria-label="Next courses"
             className={`hidden md:flex w-11 h-11 items-center justify-center rounded-full border bg-white transition-all duration-200 flex-shrink-0 ${
-              page >= totalPages - 1
+              page >= totalPages - 1 || isAnimating
                 ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
                 : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB] shadow-sm hover:shadow-md"
             }`}
@@ -307,10 +341,10 @@ const CoursesSection = () => {
         <div className="flex md:hidden justify-center gap-4 mt-8">
           <button
             onClick={handlePrev}
-            disabled={page === 0}
+            disabled={page === 0 || isAnimating}
             aria-label="Previous courses"
             className={`w-11 h-11 flex items-center justify-center rounded-full border bg-white transition-all duration-200 ${
-              page === 0
+              page === 0 || isAnimating
                 ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
                 : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB]"
             }`}
@@ -320,10 +354,10 @@ const CoursesSection = () => {
           </button>
           <button
             onClick={handleNext}
-            disabled={page >= totalPages - 1}
+            disabled={page >= totalPages - 1 || isAnimating}
             aria-label="Next courses"
             className={`w-11 h-11 flex items-center justify-center rounded-full border bg-white transition-all duration-200 ${
-              page >= totalPages - 1
+              page >= totalPages - 1 || isAnimating
                 ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
                 : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB]"
             }`}

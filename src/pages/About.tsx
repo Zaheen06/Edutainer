@@ -1,6 +1,6 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useRef, useEffect } from "react";
 import {
   Target,
   Rocket,
@@ -23,7 +23,7 @@ import {
 import heroImage from "@/assets/images/about/about-hero-learning.png";
 import visionImage from "@/assets/images/about/about-vision-future.png";
 import missionImage from "@/assets/images/about/about-innovation-ai.png";
-import vtuCollabImage from "@/assets/vtu-collab.jpg";
+import vtuCollabImage from "/collaboration-vtu.png";
 import journeyImage from "@/assets/images/about/about-journey-growth.png";
 
 /* ─────────────────────────────────────────────
@@ -109,123 +109,246 @@ const colorMap: Record<string, { bg: string; text: string; border: string; iconB
 };
 
 /* ─────────────────────────────────────────────
-   OUR STORY — Z-Pattern Layout
+   OUR STORY — Premium Zig-Zag with Scroll Animations
 ───────────────────────────────────────────── */
-const StorySection = () => {
-  const storySteps = [
-    {
-      id: "founded",
-      label: "01 — Founded",
-      title: "Our Journey of Innovation Began",
-      description:
-        "In 2018, Edutainer was established with a singular mission — to innovate the future of education. We committed from day one to transforming learning into a more engaging, practical, and future-ready experience.",
-      image: journeyImage,
-      stats: ["50K+ Students", "10+ Programs", "90% Success Rate"],
-      bgColor: "bg-blue-50/50",
-      labelColor: "text-blue-600",
-      dotColor: "bg-blue-400",
-    },
-    {
-      id: "collaboration",
-      label: "02 — Collaboration",
-      title: "Strengthening Industry Bonds",
-      description:
-        "Our landmark partnerships focus on upskilling students through job-ready courses and virtual internships, preparing them with practical skills needed for the fast-paced tech industry.",
-      image: vtuCollabImage,
-      stats: ["1 Premier Partner", "1,000+ Internships", "Real-world exposure"],
-      bgColor: "bg-gray-50/50",
-      labelColor: "text-gray-500",
-      dotColor: "bg-gray-400",
-    },
-    {
-      id: "growth",
-      label: "03 — Growth",
-      title: "Expanding Opportunities at Scale",
-      description:
-        "We launched 15+ successful programs designed to upskill engineering students and professionals in high-demand fields, driving their career growth and job readiness.",
-      image: heroImage,
-      stats: ["15+ Active Programs", "400K+ Reached", "Industry-aligned"],
-      bgColor: "bg-blue-50/50",
-      labelColor: "text-blue-600",
-      dotColor: "bg-blue-400",
-    },
-    {
-      id: "impact",
-      label: "04 — Impact",
-      title: "Transforming the Ecosystem",
-      description:
-        "From individual learners to university-wide implementations, our focus remains on providing accessible, engaging, and highly effective learning experiences.",
-      image: visionImage,
-      stats: ["Continuous Innovation", "Massive Scale", "Future-ready"],
-      bgColor: "bg-gray-50/50",
-      labelColor: "text-gray-500",
-      dotColor: "bg-gray-400",
-    },
-  ];
+const storyPhases = [
+  {
+    id: "founded",
+    number: "01",
+    tag: "Founded",
+    title: "Our Journey of Innovation Began",
+    para1: "In 2018, Edutainer was established with a singular mission — to innovate the future of education. We committed from day one to transforming learning into a more engaging, practical, and future-ready experience.",
+    para2: "Since inception, our journey reflects continuous growth, innovation, and a strong dedication to empowering learners for real-world success — serving over 50,000 students through skill enhancement and career-focused programs.",
+    image: journeyImage,
+    imgScale: "scale-100",
+    imgPosition: "object-center",
+    stats: [
+      { value: "50K+", label: "Students" },
+      { value: "10+", label: "Programs" },
+      { value: "90%", label: "Success Rate" },
+    ],
+    accent: "#2563EB",
+    accentLight: "#EFF6FF",
+    accentMid: "#BFDBFE",
+    accentDark: "#1D4ED8",
+  },
+  {
+    id: "collaboration",
+    number: "02",
+    tag: "Collaboration",
+    title: "Strengthening Industry-Academic Bonds",
+    para1: "Our landmark partnership with VTU focuses on upskilling students through job-ready courses and virtual internships, preparing them with practical skills needed for the fast-paced tech industry.",
+    para2: "Through this collaboration, we bridge the gap between academia and industry by providing hands-on learning experiences that enhance employability and career readiness at massive scale.",
+    image: vtuCollabImage,
+    imgScale: "scale-100",
+    imgPosition: "object-center",
+    stats: [
+      { value: "1", label: "Premier Partner" },
+      { value: "1K+", label: "Internships" },
+      { value: "Real", label: "World Exposure" },
+    ],
+    accent: "#7C3AED",
+    accentLight: "#F5F3FF",
+    accentMid: "#DDD6FE",
+    accentDark: "#6D28D9",
+  },
+  {
+    id: "growth",
+    number: "03",
+    tag: "Growth",
+    title: "Expanding Opportunities at Scale",
+    para1: "We launched 15+ successful programs designed to upskill engineering students and professionals in high-demand fields, driving their career growth and job readiness at an unprecedented scale.",
+    para2: "Proudly partnered with a prestigious technological university to support 400,000+ engineering students across Karnataka, delivering industry-aligned learning experiences that forge future-focused career paths.",
+    image: heroImage,
+    imgScale: "scale-100",
+    imgPosition: "object-center",
+    stats: [
+      { value: "15+", label: "Programs" },
+      { value: "400K+", label: "Reached" },
+      { value: "100%", label: "Industry-aligned" },
+    ],
+    accent: "#059669",
+    accentLight: "#ECFDF5",
+    accentMid: "#A7F3D0",
+    accentDark: "#047857",
+  },
+  {
+    id: "impact",
+    number: "04",
+    tag: "Impact",
+    title: "Transforming the Education Ecosystem",
+    para1: "From individual learners to university-wide implementations, our focus remains on providing accessible, engaging, and highly effective learning experiences that create lasting impact.",
+    para2: "We continue to innovate and scale our reach, ensuring that every learner — regardless of background or geography — has access to quality education that prepares them for the challenges and opportunities of tomorrow.",
+    image: visionImage,
+    imgScale: "scale-100",
+    imgPosition: "object-center",
+    stats: [
+      { value: "∞", label: "Innovation" },
+      { value: "Global", label: "Scale" },
+      { value: "Future", label: "Ready" },
+    ],
+    accent: "#D97706",
+    accentLight: "#FFFBEB",
+    accentMid: "#FDE68A",
+    accentDark: "#B45309",
+  },
+];
+
+/* Hook: animate a single row when it enters the viewport (scroll-triggered) */
+const useRowAnimation = (index: number) => {
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const isImageLeft = index % 2 === 0;
+
+  useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+
+    const imgCol = el.querySelector<HTMLElement>(".zz-img");
+    const txtCol = el.querySelector<HTMLElement>(".zz-txt");
+
+    // Set initial hidden state
+    [imgCol, txtCol].forEach((node) => {
+      if (!node) return;
+      node.style.opacity = "0";
+      node.style.willChange = "opacity, transform";
+    });
+    if (imgCol) imgCol.style.transform = isImageLeft ? "translateX(-48px) translateY(16px)" : "translateX(48px) translateY(16px)";
+    if (txtCol) txtCol.style.transform = isImageLeft ? "translateX(40px) translateY(16px)" : "translateX(-40px) translateY(16px)";
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        const staggerBase = index * 200; // 200ms stagger per section
+
+        const animate = (node: HTMLElement | null, extraDelay: number) => {
+          if (!node) return;
+          const total = staggerBase + extraDelay;
+          node.style.transition = `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${total}ms, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${total}ms`;
+          node.style.opacity = "1";
+          node.style.transform = "translateX(0) translateY(0)";
+        };
+
+        animate(imgCol, 0);
+        animate(txtCol, 150);
+        obs.disconnect();
+      },
+      // generous rootMargin so rows near top fire on page load without scrolling
+      { threshold: 0.05, rootMargin: "0px 0px 100px 0px" }
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [index, isImageLeft]);
+
+  return rowRef;
+};
+
+/* Single story row — balanced 50/50 layout */
+const StoryRow = ({ phase, index }: { phase: typeof storyPhases[0]; index: number }) => {
+  const rowRef = useRowAnimation(index);
+  const isImageLeft = index % 2 === 0;
 
   return (
-    <section className="py-24 bg-white">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 md:text-center">
-        <span className="text-xs font-semibold text-blue-600 tracking-[0.12em] uppercase mb-4 block">
-          Our Story
-        </span>
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
-          A Journey of Innovation
-        </h2>
+    <div
+      ref={rowRef}
+      className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+    >
+      {/* ── Image ── */}
+      <div className={`zz-img ${isImageLeft ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
+        <div
+          className="group overflow-hidden rounded-2xl w-full"
+          style={{
+            maxWidth: "500px",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.05)",
+            transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+            (e.currentTarget as HTMLElement).style.boxShadow =
+              "0 4px 8px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.11), 0 40px 64px rgba(0,0,0,0.06)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+            (e.currentTarget as HTMLElement).style.boxShadow =
+              "0 2px 4px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08), 0 24px 48px rgba(0,0,0,0.05)";
+          }}
+        >
+          <div className="aspect-[4/3]">
+            <img
+              src={phase.image}
+              alt={phase.title}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-col">
-        {storySteps.map((step, index) => {
-          const isEven = index % 2 === 1; // 1, 3 for text on the left
-          return (
-            <div key={step.id} className={`py-16 lg:py-24 ${step.bgColor} border-y border-transparent transition-colors`}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                  
-                  {/* Image container */}
-                  <div className={`order-1 ${isEven ? 'lg:order-2' : ''} animate-fade-in`}>
-                    <div className="aspect-[4/3] lg:aspect-[5/4] rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
+      {/* ── Text ── */}
+      <div className={`zz-txt ${isImageLeft ? "lg:order-2" : "lg:order-1"} flex flex-col gap-5`}>
+        {/* Vertical accent line */}
+        <div className="w-8 h-[2px] rounded-full" style={{ backgroundColor: phase.accent }} />
 
-                  {/* Text content */}
-                  <div className={`order-2 ${isEven ? 'lg:order-1' : ''} animate-fade-in`}>
-                    <span className={`text-xs font-bold tracking-[0.15em] uppercase mb-4 block ${step.labelColor}`}>
-                      {step.label}
-                    </span>
-                    <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-                      {step.title}
-                    </h3>
-                    <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-xl">
-                      {step.description}
-                    </p>
-                    
-                    {/* Inline stats */}
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
-                      {step.stats.map((stat, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className={`w-1.5 h-1.5 rounded-full ${step.dotColor}`} />
-                          <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{stat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {/* Heading */}
+        <h3
+          className="text-[1.75rem] lg:text-[2rem] font-bold text-gray-900 leading-[1.2]"
+          style={{ letterSpacing: "-0.025em" }}
+        >
+          {phase.title}
+        </h3>
+
+        {/* Body */}
+        <p className="text-[15px] text-gray-500 leading-[1.8]">{phase.para1}</p>
+        <p className="text-[15px] text-gray-400 leading-[1.8]">{phase.para2}</p>
       </div>
-    </section>
+    </div>
   );
 };
+
+const StorySection = () => (
+  <section className="relative py-24 bg-white overflow-hidden">
+
+    {/* Single very subtle background wash — no noise */}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, #F0F5FF 0%, transparent 70%)" }}
+    />
+
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Section header */}
+      <div className="mb-20 max-w-xl">
+        <p className="text-xs font-bold tracking-[0.16em] uppercase text-blue-600 mb-4">Our Story</p>
+        <h2
+          className="text-4xl lg:text-[3rem] font-bold text-gray-900 leading-[1.1]"
+          style={{ letterSpacing: "-0.025em" }}
+        >
+          A Journey of Innovation
+        </h2>
+        <p className="mt-4 text-base text-gray-500 leading-relaxed max-w-md">
+          Four defining phases that shaped our mission to transform education for the modern world.
+        </p>
+      </div>
+
+      {/* Rows */}
+      <div className="flex flex-col gap-24 lg:gap-32">
+        {storyPhases.map((phase, i) => (
+          <StoryRow key={phase.id} phase={phase} index={i} />
+        ))}
+      </div>
+    </div>
+
+    <style>{`
+      @media (prefers-reduced-motion: reduce) {
+        .zz-img, .zz-txt {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
+    `}</style>
+  </section>
+);
 
 /* ─────────────────────────────────────────────
    COMPONENT
@@ -268,19 +391,7 @@ const About = () => {
                 and shape the world.
               </p>
 
-              {/* Stat row */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-100">
-                {impactStats.slice(0, 3).map((s) => (
-                  <div key={s.label}>
-                    <div className="text-3xl font-bold text-gray-900 tracking-tight">
-                      {s.number}
-                    </div>
-                    <div className="text-xs text-gray-500 mt-1 font-medium">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+
             </div>
 
             {/* Right: hero image with decorative frame */}
@@ -299,44 +410,6 @@ const About = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          IMPACT STATS — 4-column cards
-      ══════════════════════════════════════ */}
-      <section className="py-20 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {impactStats.map((stat, index) => {
-              const Icon = stat.icon;
-              const c = colorMap[stat.color];
-              return (
-                <div
-                  key={stat.label}
-                  className={`relative bg-white rounded-2xl p-7 border ${c.border} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden group`}
-                  style={{
-                    animation: 'fadeSlideUp 0.6s ease-out',
-                    animationDelay: `${index * 100}ms`,
-                    animationFillMode: 'both',
-                    opacity: 0
-                  }}
-                >
-                  {/* Background tint on hover */}
-                  <div className={`absolute inset-0 ${c.bg} opacity-0 group-hover:opacity-40 transition-opacity duration-300`} />
-                  <div className="relative">
-                    <div className={`w-11 h-11 ${c.iconBg} rounded-xl flex items-center justify-center mb-5`}>
-                      <Icon className={`w-5 h-5 ${c.text}`} />
-                    </div>
-                    <div className={`text-4xl font-bold ${c.number} mb-1 tracking-tight`}>
-                      {stat.number}
-                    </div>
-                    <div className="text-sm font-medium text-gray-500">{stat.label}</div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
@@ -448,6 +521,75 @@ const About = () => {
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-2xl bg-violet-600 opacity-10 -z-10" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          OUR IMPACT — After Mission
+      ══════════════════════════════════════ */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs font-bold tracking-[0.14em] uppercase text-blue-600 mb-3 block">
+              Our Impact
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight tracking-tight">
+              Numbers That Tell Our Story
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                value: "50K+",
+                label: "Learners Empowered",
+                desc: "Empowering over 50,000 learners with accessible, technology-driven education that builds confidence and career readiness.",
+                color: "blue",
+              },
+              {
+                value: "1,000+",
+                label: "Virtual Internships",
+                desc: "Delivering 1,000+ virtual internships that connect academic learning with meaningful industry experience.",
+                color: "violet",
+              },
+              {
+                value: "90%",
+                label: "Completion Rate",
+                desc: "Maintaining a 90% completion rate through engaging, simplified, and learner-focused educational experiences.",
+                color: "emerald",
+              },
+              {
+                value: "20+",
+                label: "Partner Organizations",
+                desc: "Partnering with 20+ organizations to expand opportunities and enhance the impact of quality education.",
+                color: "amber",
+              },
+            ].map((item, i) => {
+              const palette: Record<string, { bar: string; num: string; bg: string; border: string }> = {
+                blue:    { bar: "bg-blue-500",    num: "text-blue-600",    bg: "bg-blue-50",    border: "border-blue-100" },
+                violet:  { bar: "bg-violet-500",  num: "text-violet-600",  bg: "bg-violet-50",  border: "border-violet-100" },
+                emerald: { bar: "bg-emerald-500", num: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
+                amber:   { bar: "bg-amber-500",   num: "text-amber-600",   bg: "bg-amber-50",   border: "border-amber-100" },
+              };
+              const p = palette[item.color];
+              return (
+                <div
+                  key={item.label}
+                  className={`relative bg-white rounded-2xl p-7 border ${p.border} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  {/* Top accent bar */}
+                  <div className={`absolute top-0 left-0 right-0 h-[3px] ${p.bar} rounded-t-2xl`} />
+
+                  <div className={`text-4xl font-bold tracking-tight mb-2 ${p.num}`}>
+                    {item.value}
+                  </div>
+                  <div className="text-sm font-semibold text-gray-900 mb-3">{item.label}</div>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

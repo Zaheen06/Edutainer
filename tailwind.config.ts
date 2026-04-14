@@ -13,8 +13,8 @@ export default {
       },
     },
     fontFamily: {
-      heading: ['Plus Jakarta Sans', 'sans-serif'],
-      body: ['DM Sans', 'sans-serif'],
+      heading: ['Inter', 'sans-serif'],
+      body: ['Inter', 'sans-serif'],
     },
     extend: {
       colors: {

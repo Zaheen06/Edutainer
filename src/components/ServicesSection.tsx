@@ -142,33 +142,33 @@ const ServicesSection = () => {
   return (
     <section
       id="features"
-      className="py-12 md:py-16 bg-white"
+      className="py-16 lg:py-24 bg-white"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div className="container-custom">
 
         {/* ── Section header ── */}
-        <div className="text-center mb-14">
-          <span className="inline-block px-3.5 py-1.5 bg-[#EFF6FF] text-[#2563EB] text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-[11px] font-bold rounded-full mb-4 uppercase tracking-[0.1em]">
             What We Offer
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-3 leading-tight"
-            style={{ letterSpacing: "-0.01em" }}
+            className="text-3xl md:text-[2.6rem] font-bold text-gray-900 mb-4 leading-[1.1]"
+            style={{ letterSpacing: "-0.025em" }}
           >
             Everything You Need to Succeed
           </h2>
-          <p className="text-base max-w-xl mx-auto leading-relaxed text-[#475569]">
+          <p className="text-base max-w-lg mx-auto leading-relaxed text-gray-500">
             Four pillars that make Edutainer the platform learners trust to
             launch and grow their careers.
           </p>
         </div>
 
         {/* ── Tab Row ── */}
-        <div className="relative overflow-x-auto -mx-4 px-4">
+        <div className="relative overflow-x-auto">
           <div
-            className="flex items-end min-w-max md:min-w-0 md:justify-center border-b border-[#E5E7EB]"
+            className="flex items-end min-w-max md:min-w-0 md:justify-center border-b border-[var(--border-color)]"
             role="tablist"
           >
             {tabs.map((tab, index) => {
@@ -180,32 +180,27 @@ const ServicesSection = () => {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => handleTabClick(index)}
-                  className="relative flex items-center gap-2 px-5 py-3.5 text-sm font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none select-none"
-                  style={{ color: isActive ? tab.accentColor : "#6B7280" }}
+                  className="relative flex items-center gap-2.5 px-6 py-4 text-base font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none"
+                  style={{
+                    color: isActive ? 'var(--color-primary)' : 'var(--color-gray-500)',
+                    backgroundColor: 'transparent'
+                  }}
                 >
                   <Icon
-                    className="w-4 h-4 flex-shrink-0"
-                    style={{ color: isActive ? tab.accentColor : "#9CA3AF" }}
-                  />
-                  {tab.label}
-
-                  {/* Static underline background */}
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-[2.5px] rounded-t-full"
+                    className="w-5 h-5 flex-shrink-0"
                     style={{
-                      backgroundColor: isActive ? tab.accentColor : "transparent",
-                      opacity: isActive ? 0.25 : 0,
+                      color: isActive ? 'var(--color-primary)' : 'var(--color-gray-400)'
                     }}
                   />
+                  <span className="ml-1">{tab.label}</span>
 
-                  {/* Animated progress bar - CSS animation */}
+                  {/* Animated underline background */}
                   {isActive && (
                     <span
-                      key={animationKey}
-                      className="absolute bottom-0 left-0 h-[2.5px] rounded-t-full progress-bar"
+                      className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full"
                       style={{
-                        backgroundColor: tab.accentColor,
-                        animationPlayState: paused ? 'paused' : 'running',
+                        background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))',
+                        height: '3px'
                       }}
                     />
                   )}
@@ -305,10 +300,10 @@ const ServicesSection = () => {
       </div>
 
       <style>{`
-        #features button[role="tab"] { 
-          -webkit-tap-highlight-color: transparent; 
+        #features button[role="tab"] {
+          -webkit-tap-highlight-color: transparent;
         }
-        
+
         @keyframes progressFill {
           from {
             width: 0%;
@@ -317,9 +312,10 @@ const ServicesSection = () => {
             width: 100%;
           }
         }
-        
+
         .progress-bar {
           animation: progressFill ${SLIDE_DURATION}ms linear forwards;
+          background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
         }
       `}</style>
     </section>
