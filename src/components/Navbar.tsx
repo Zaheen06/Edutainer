@@ -61,16 +61,17 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-2">
             <a
               href="/signin"
-              className="px-4 py-2 text-[13.5px] font-medium text-gray-600 hover:text-blue-600 rounded-lg transition-colors duration-200"
+              className="relative px-4 py-2 text-[13.5px] font-medium text-gray-600 hover:text-blue-600 rounded-lg transition-colors duration-200 group"
             >
               Sign In
+              <span className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
             </a>
             <a
               href="/register"
               className="px-5 py-2 text-[13.5px] font-semibold text-white rounded-xl transition-all duration-200 hover:-translate-y-px hover:shadow-lg"
               style={{
-                background: "linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)",
-                boxShadow: "0 2px 10px rgba(37,99,235,0.3)",
+                background: "linear-gradient(135deg, #048CE4 0%, #0270C0 100%)",
+                boxShadow: "0 2px 10px rgba(4,140,228,0.3)",
               }}
             >
               Register
@@ -116,7 +117,7 @@ const Navbar = () => {
             <a
               href="/register"
               className="px-4 py-2.5 text-sm font-semibold text-white rounded-xl text-center transition-all duration-200"
-              style={{ background: "linear-gradient(135deg, #2563EB, #4F46E5)" }}
+              style={{ background: "linear-gradient(135deg, #048CE4, #0270C0)" }}
             >
               Register
             </a>

@@ -4,7 +4,7 @@ import { Clock, Users, Briefcase, Layers, ArrowRight } from "lucide-react";
 /* ─────────────────────────────────────────────
    DATA
 ───────────────────────────────────────────── */
-const SLIDE_DURATION = 5500; // ms per slide
+const SLIDE_DURATION = 5000; // ms — progress bar + auto-advance
 
 const tabs = [
   {
@@ -19,9 +19,10 @@ const tabs = [
       { value: "100%", label: "Self-paced Modules" },
       { value: "50+", label: "Learning Tracks" },
     ],
-    accentColor: "#2563EB",
+    accentColor: "#048CE4",
     lightBg: "#EFF6FF",
     lightAccent: "#BFDBFE",
+    progressGradient: "linear-gradient(90deg, #048CE4, #0270C0)",
   },
   {
     id: "expert-instructors",
@@ -38,6 +39,7 @@ const tabs = [
     accentColor: "#7C3AED",
     lightBg: "#F5F3FF",
     lightAccent: "#DDD6FE",
+    progressGradient: "linear-gradient(90deg, #7C3AED, #6D28D9)",
   },
   {
     id: "industry-internship",
@@ -51,9 +53,10 @@ const tabs = [
       { value: "100%", label: "Placement Support" },
       { value: "400K+", label: "Students Empowered" },
     ],
-    accentColor: "#059669",
+    accentColor: "#16a34a",
     lightBg: "#F0FDF4",
     lightAccent: "#A7F3D0",
+    progressGradient: "linear-gradient(90deg, #16a34a, #22c55e)",
   },
   {
     id: "cutting-edge-courses",
@@ -70,6 +73,7 @@ const tabs = [
     accentColor: "#D97706",
     lightBg: "#FFFBEB",
     lightAccent: "#FDE68A",
+    progressGradient: "linear-gradient(90deg, #D97706, #F59E0B)",
   },
 ];
 
@@ -78,74 +82,50 @@ const tabs = [
 ───────────────────────────────────────────── */
 const ServicesSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [progressKey, setProgressKey] = useState(0); // bump to restart CSS animation
   const [visible, setVisible] = useState(true);
-  const [animationKey, setAnimationKey] = useState(0); // Force animation restart
-  const [paused, setPaused] = useState(false);
 
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pauseTimeRef = useRef<number>(0);
-  const startTimeRef = useRef<number>(Date.now());
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  const goTo = useCallback((next: number) => {
+    // Fade content out
+    setVisible(false);
+    setTimeout(() => {
+      setActiveIndex(next);
+      setProgressKey(k => k + 1); // restart progress animation
+      setVisible(true);
+    }, 280);
+  }, []);
+
+  const scheduleNext = useCallback((fromIndex: number) => {
+    clearTimer();
+    timerRef.current = setTimeout(() => {
+      const next = (fromIndex + 1) % tabs.length;
+      goTo(next);
+    }, SLIDE_DURATION);
+  }, [goTo]);
+
+  // Start timer whenever activeIndex changes
+  useEffect(() => {
+    scheduleNext(activeIndex);
+    return clearTimer;
+  }, [activeIndex, scheduleNext]);
+
+  const handleTabClick = (index: number) => {
+    if (index === activeIndex) return;
+    clearTimer();
+    goTo(index);
+  };
 
   const active = tabs[activeIndex];
   const ActiveIcon = active.icon;
 
-  const clearTimers = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-  };
-
-  const transitionTo = useCallback((nextIndex: number) => {
-    setVisible(false);
-    setTimeout(() => {
-      setActiveIndex(nextIndex);
-      setVisible(true);
-      setAnimationKey(prev => prev + 1); // Reset animation
-      startTimeRef.current = Date.now();
-    }, 320);
-  }, []);
-
-  const startCycle = useCallback(() => {
-    clearTimers();
-    startTimeRef.current = Date.now();
-    
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => {
-        const next = (prev + 1) % tabs.length;
-        transitionTo(next);
-        return prev;
-      });
-    }, SLIDE_DURATION);
-  }, [transitionTo]);
-
-  useEffect(() => {
-    startCycle();
-    return clearTimers;
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleTabClick = (index: number) => {
-    if (index === activeIndex) return;
-    clearTimers();
-    transitionTo(index);
-    setTimeout(() => startCycle(), 350);
-  };
-
-  const handleMouseEnter = () => {
-    setPaused(true);
-    pauseTimeRef.current = Date.now();
-  };
-
-  const handleMouseLeave = () => {
-    setPaused(false);
-    const pauseDuration = Date.now() - pauseTimeRef.current;
-    startTimeRef.current += pauseDuration;
-  };
-
   return (
-    <section
-      id="features"
-      className="py-16 lg:py-24 bg-white"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <section id="features" className="py-16 lg:py-24 bg-white">
       <div className="container-custom">
 
         {/* ── Section header ── */}
@@ -168,7 +148,7 @@ const ServicesSection = () => {
         {/* ── Tab Row ── */}
         <div className="relative overflow-x-auto">
           <div
-            className="flex items-end min-w-max md:min-w-0 md:justify-center border-b border-[var(--border-color)]"
+            className="flex items-end min-w-max md:min-w-0 md:justify-center border-b border-gray-200"
             role="tablist"
           >
             {tabs.map((tab, index) => {
@@ -180,27 +160,25 @@ const ServicesSection = () => {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => handleTabClick(index)}
-                  className="relative flex items-center gap-2.5 px-6 py-4 text-base font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none"
-                  style={{
-                    color: isActive ? 'var(--color-primary)' : 'var(--color-gray-500)',
-                    backgroundColor: 'transparent'
-                  }}
+                  className="relative flex items-center gap-2.5 px-6 py-4 text-sm font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none"
+                  style={{ color: isActive ? tab.accentColor : "#6B7280" }}
                 >
-                  <Icon
-                    className="w-5 h-5 flex-shrink-0"
-                    style={{
-                      color: isActive ? 'var(--color-primary)' : 'var(--color-gray-400)'
-                    }}
-                  />
-                  <span className="ml-1">{tab.label}</span>
+                  <Icon className="w-4 h-4 flex-shrink-0" style={{ color: isActive ? tab.accentColor : "#9CA3AF" }} />
+                  <span>{tab.label}</span>
 
-                  {/* Animated underline background */}
+                  {/* Track line — always visible, gray */}
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full bg-gray-100"
+                  />
+
+                  {/* Progress fill — only on active tab, keyed to restart */}
                   {isActive && (
                     <span
-                      className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full"
+                      key={progressKey}
+                      className="absolute bottom-0 left-0 h-[3px] rounded-t-full"
                       style={{
-                        background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))',
-                        height: '3px'
+                        background: tab.progressGradient,
+                        animation: `tabProgress ${SLIDE_DURATION}ms linear forwards`,
                       }}
                     />
                   )}
@@ -303,19 +281,12 @@ const ServicesSection = () => {
         #features button[role="tab"] {
           -webkit-tap-highlight-color: transparent;
         }
-
-        @keyframes progressFill {
-          from {
-            width: 0%;
-          }
-          to {
-            width: 100%;
-          }
+        @keyframes tabProgress {
+          from { width: 0%; }
+          to   { width: 100%; }
         }
-
-        .progress-bar {
-          animation: progressFill ${SLIDE_DURATION}ms linear forwards;
-          background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes tabProgress { from { width: 100%; } to { width: 100%; } }
         }
       `}</style>
     </section>
