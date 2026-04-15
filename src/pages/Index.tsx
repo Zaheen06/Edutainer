@@ -1,11 +1,12 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
-import VTUSection from "@/components/VTUSection";
-import CoursesSection from "@/components/CoursesSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import JourneySection from "@/components/JourneySection";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import HeroSection from "@/components/sections/HeroSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import SimpleServicesSection from "@/components/sections/SimpleServicesSection";
+import VTUSection from "@/components/sections/VTUSection";
+import CoursesSection from "@/components/sections/CoursesSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import JourneySection from "@/components/sections/JourneySection";
+import Footer from "@/components/layout/Footer";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <ServicesSection />
+      <SimpleServicesSection />
       <VTUSection />
       <CoursesSection />
       <TestimonialsSection />

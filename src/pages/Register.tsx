@@ -4,8 +4,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,14 +25,12 @@ const Register = () => {
   const handleSendOTP = () => {
     if (formData.email) {
       setOtpSent(true);
-      console.log("Sending OTP to:", formData.email);
     }
   };
 
   const handleVerifyOTP = () => {
     if (formData.otp) {
       setEmailVerified(true);
-      console.log("Verifying OTP:", formData.otp);
     }
   };
 
@@ -53,8 +51,6 @@ const Register = () => {
       alert("Please agree to the Terms & Conditions");
       return;
     }
-    
-    console.log("Registration data:", formData);
   };
 
   return (
