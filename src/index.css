@@ -73,6 +73,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -208,4 +209,129 @@
 *:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
+}
+
+/* ─── Dark Mode Overrides ─────────────────────────────────────────────────── */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0F172A;
+  color: #F1F5F9;
+}
+
+/* Sections & page backgrounds */
+html.dark section,
+html.dark main {
+  background-color: #0F172A !important;
+}
+
+html.dark .bg-white {
+  background-color: #1E293B !important;
+}
+
+html.dark .bg-gray-50,
+html.dark [style*="background: #F8FAFC"],
+html.dark [style*="background-color: #F8FAFC"] {
+  background-color: #1E293B !important;
+}
+
+/* Cards */
+html.dark .rounded-xl,
+html.dark .rounded-2xl {
+  background-color: #1E293B;
+  border-color: #334155;
+}
+
+/* Text colors */
+html.dark .text-gray-900,
+html.dark .text-\[\#0F172A\],
+html.dark .text-\[\#0B2545\] {
+  color: #F1F5F9 !important;
+}
+
+html.dark .text-gray-700,
+html.dark .text-\[\#374151\] {
+  color: #CBD5E1 !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-\[\#475569\] {
+  color: #94A3B8 !important;
+}
+
+html.dark .text-gray-500,
+html.dark .text-\[\#64748B\] {
+  color: #64748B !important;
+}
+
+html.dark .text-gray-400 {
+  color: #475569 !important;
+}
+
+/* Borders */
+html.dark .border-gray-100,
+html.dark .border-\[\#E2E8F0\],
+html.dark .border-\[\#E8EFF6\] {
+  border-color: #334155 !important;
+}
+
+/* Navbar */
+html.dark nav {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  border-bottom-color: rgba(51, 65, 85, 0.8) !important;
+}
+
+html.dark nav a,
+html.dark nav button {
+  color: #CBD5E1;
+}
+
+html.dark nav a:hover {
+  color: #048CE4;
+}
+
+/* Hero section */
+html.dark .hero-section,
+html.dark section[style*="linear-gradient(135deg, #f5faff"] {
+  background: linear-gradient(145deg, #0F172A 0%, #1E293B 50%, #0F172A 100%) !important;
+}
+
+/* Footer */
+html.dark footer {
+  background: linear-gradient(to bottom, #1E293B, #0F172A) !important;
+  border-top-color: #334155 !important;
+}
+
+html.dark footer p,
+html.dark footer a,
+html.dark footer h4 {
+  color: #94A3B8;
+}
+
+html.dark footer a:hover {
+  color: #048CE4;
+}
+
+/* Inputs & form elements */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1E293B !important;
+  border-color: #334155 !important;
+  color: #F1F5F9 !important;
+}
+
+/* Scrollbar in dark mode */
+html.dark ::-webkit-scrollbar-track {
+  background: #1E293B;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

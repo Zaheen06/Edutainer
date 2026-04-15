@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Star, Clock, Users, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 import courseIelts from "@/assets/course-ielts.jpg";
 import courseAi from "@/assets/course-ai.jpg";
@@ -183,11 +182,12 @@ const CoursesSection = () => {
             <button
               key={cat}
               onClick={() => handleCategoryChange(cat)}
-              className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-200 ${
+              className={`px-5 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
                 activeCategory === cat
-                  ? "bg-[#2563EB] text-white"
-                  : "bg-[#F1F5F9] text-[#475569] hover:bg-[#E2E8F0] hover:text-[#2563EB]"
+                  ? "text-white"
+                  : "bg-[#F1F5F9] text-[#475569] hover:bg-[#E0F2FE] hover:text-[#048CE4]"
               }`}
+              style={activeCategory === cat ? { background: "linear-gradient(135deg, #048CE4, #0454AC)" } : {}}
             >
               {cat}
             </button>
@@ -225,91 +225,86 @@ const CoursesSection = () => {
             {visible.map((course) => (
               <div
                 key={course.title}
-                className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden group cursor-pointer flex flex-col hover:-translate-y-1 transition-all duration-250 ease-out snap-center md:snap-align-none min-w-full md:min-w-0"
-                style={{ 
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(37,99,235,0.05)',
-                  transition: 'all 0.25s ease'
+                className="bg-white rounded-xl border border-[#E8EFF6] overflow-hidden group cursor-pointer flex flex-col"
+                style={{
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(4,140,228,0.06)",
+                  transition: "all 0.22s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08), 0 8px 24px rgba(37,99,235,0.12)';
+                  e.currentTarget.style.transform = "translateY(-3px) scale(1.005)";
+                  e.currentTarget.style.boxShadow = "0 6px 20px rgba(4,140,228,0.14), 0 2px 6px rgba(0,0,0,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(37,99,235,0.05)';
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.boxShadow = "0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(4,140,228,0.06)";
                 }}
               >
-                {/* Course Image */}
-                <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                {/* Image — compact landscape */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: "16/12" }}>
                   <img
                     src={course.img}
                     alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     loading="lazy"
-                    style={{ transition: 'transform 0.3s ease' }}
                   />
-                  {/* Category badge top-left */}
-                  <div className="absolute top-3 left-3">
-                    <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${categoryColors[course.category]}`}>
+                  {/* Badges */}
+                  <div className="absolute top-2 left-2">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${categoryColors[course.category]}`}>
                       {course.category}
                     </span>
                   </div>
-                  {/* Free badge top-right */}
-                  <div className="absolute top-3 right-3">
-                    <span className="px-3 py-1.5 bg-[#22C55E] text-white rounded-full text-xs font-semibold">
+                  <div className="absolute top-2 right-2">
+                    <span className="text-[10px] font-bold px-2 py-0.5 bg-emerald-500 text-white rounded-full">
                       {course.price}
                     </span>
                   </div>
                 </div>
 
-                {/* Course Content */}
-                <div className="p-5 flex flex-col flex-1 gap-3">
-                  {/* Provider */}
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-[#2563EB]" />
-                    <span className="text-xs text-[#2563EB] font-semibold">Edutainer</span>
+                {/* Content */}
+                <div className="p-4 flex flex-col gap-3">
+                  {/* Provider row */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <BookOpen className="w-3 h-3 text-[#048CE4]" />
+                      <span className="text-[10px] font-bold text-[#048CE4] uppercase tracking-wide">Edutainer</span>
+                    </div>
+                    {course.rating > 0 && (
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(course.rating)].map((_, i) => (
+                          <Star key={i} className="w-2.5 h-2.5 text-amber-400 fill-amber-400" />
+                        ))}
+                        <span className="text-[10px] text-gray-500 ml-0.5 font-medium">{course.rating}.0</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-[#0F172A] leading-snug line-clamp-2">
+                  <h3 className="text-[13px] font-semibold text-gray-900 leading-snug line-clamp-2">
                     {course.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-[#64748B] leading-relaxed line-clamp-2 flex-1">
+                  <p className="text-[11.5px] text-gray-400 leading-relaxed line-clamp-2">
                     {course.desc}
                   </p>
 
-                  {/* Star Rating */}
-                  {course.rating > 0 && (
-                    <div className="flex items-center gap-1">
-                      {[...Array(course.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
-                      ))}
-                      <span className="text-sm text-[#64748B] ml-1 font-medium">{course.rating}.0</span>
+                  {/* Meta + CTA row */}
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-100 mt-0.5">
+                    <div className="flex items-center gap-3 text-[11px] text-gray-400">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />{course.duration}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Users className="w-3 h-3" />{course.students}
+                      </span>
                     </div>
-                  )}
-
-                  {/* Meta info */}
-                  <div className="flex items-center justify-between text-sm text-[#64748B] pt-3 border-t border-[#E2E8F0]">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      <span>{course.students} enrolled</span>
-                    </div>
+                    <button
+                      className="text-[11px] font-semibold text-white px-3 py-1 rounded-lg transition-all duration-200 hover:brightness-110"
+                      style={{ background: "linear-gradient(135deg, #048CE4, #0454AC)" }}
+                    >
+                      Enroll
+                    </button>
                   </div>
-
-                  {/* CTA */}
-                  <Button 
-                    size="sm" 
-                    className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-sm font-medium mt-2 rounded-lg transition-all duration-200"
-                    style={{ 
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    Enroll Now
-                  </Button>
                 </div>
               </div>
             ))}
@@ -385,13 +380,12 @@ const CoursesSection = () => {
 
         {/* View All CTA */}
         <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-[#E2E8F0] text-[#2563EB] hover:bg-[#EFF6FF] hover:border-[#2563EB] font-medium transition-all duration-200"
+          <a
+            href="/#courses"
+            className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-2.5 rounded-full border border-[#048CE4] text-[#048CE4] hover:bg-[#E0F2FE] transition-all duration-200"
           >
             View All Courses
-          </Button>
+          </a>
         </div>
       </div>
     </section>
