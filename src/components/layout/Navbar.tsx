@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -75,18 +76,9 @@ const Navbar = () => {
           </div>
 
           {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-3">
             {/* Dark mode toggle */}
-            <button
-              onClick={() => setDark(!dark)}
-              aria-label="Toggle dark mode"
-              className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-200 hover:bg-blue-50 dark:hover:bg-gray-800 text-gray-500 hover:text-[#048CE4]"
-            >
-              {dark
-                ? <Sun className="w-4 h-4 text-amber-400" />
-                : <Moon className="w-4 h-4" />
-              }
-            </button>
+            <ThemeToggle isDark={dark} onToggle={() => setDark(!dark)} />
 
             <a
               href="/signin"
@@ -137,13 +129,9 @@ const Navbar = () => {
             </a>
           ))}
           <div className="flex flex-col gap-2 pt-5 border-t border-gray-100 mt-4">
-              <button
-                onClick={() => setDark(!dark)}
-                className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-[#048CE4] hover:bg-blue-50 rounded-xl transition-all duration-200"
-              >
-                {dark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
-                {dark ? "Light Mode" : "Dark Mode"}
-              </button>
+            <div className="px-4 py-2">
+              <ThemeToggle isDark={dark} onToggle={() => setDark(!dark)} />
+            </div>
             <a
               href="/signin"
               className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 text-center"

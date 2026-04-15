@@ -4,8 +4,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,7 +53,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Navbar />
+      
       
       <div className="flex-1 flex items-center justify-center px-4 py-32">
         <div className="w-full max-w-xl">
@@ -259,7 +257,7 @@ const Register = () => {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
   );
 };

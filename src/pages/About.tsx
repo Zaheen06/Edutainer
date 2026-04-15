@@ -64,24 +64,24 @@ const storyPhases = [
   {
     id: "founded",
     title: "Our Journey of Innovation Began",
-    para1: "In 2018, Edutainer was established with a singular mission — to innovate the future of education. We committed from day one to transforming learning into a more engaging, practical, and future-ready experience.",
-    para2: "Since inception, our journey reflects continuous growth, innovation, and a strong dedication to empowering learners for real-world success — serving over 50,000 students through skill enhancement and career-focused programs.",
+    para1: "In 2018, Edutainer was established with a mission to innovate education. Successfully served over 50,000 students through skill enhancement and career-focused programs.",
+    para2: "Since its inception, Edutainer has been committed to transforming learning into a more engaging, practical, and future-ready experience. Our journey reflects continuous growth, innovation, and a strong dedication to empowering learners for real-world success.",
     image: "/images/about/about-journey-growth.svg",
     accent: "#2563EB",
   },
   {
     id: "collaboration",
     title: "Strengthening Industry-Academic Bonds",
-    para1: "Our landmark partnership with VTU focuses on upskilling students through job-ready courses and virtual internships, preparing them with practical skills needed for the fast-paced tech industry.",
-    para2: "Through this collaboration, we bridge the gap between academia and industry by providing hands-on learning experiences that enhance employability and career readiness at massive scale.",
+    para1: "Our partnership with VTU focuses on upskilling students through job-ready courses and virtual internships, preparing them with practical skills needed for the tech industry.",
+    para2: "Through this collaboration, we bridge the gap between academics and industry by providing hands-on learning experiences that enhance employability and career readiness.",
     image: "/images/about/collaboration-vtu.png",
     accent: "#7C3AED",
   },
   {
     id: "growth",
-    title: "Expanding Opportunities at Scale",
-    para1: "We launched 15+ successful programs designed to upskill engineering students and professionals in high-demand fields, driving their career growth and job readiness at an unprecedented scale.",
-    para2: "Proudly partnered with a prestigious technological university to support 400,000+ engineering students across Karnataka, delivering industry-aligned learning experiences that forge future-focused career paths.",
+    title: "Expanding Opportunities Through Innovation",
+    para1: "Launched 15+ successful programs designed to upskill engineering students and professionals in high-demand fields. Proudly partnered with a prestigious technological university to support 400,000 engineering students, helping to drive their career growth and job readiness.",
+    para2: "Through these initiatives, we continue to strengthen our impact by delivering industry-aligned learning experiences that empower learners with practical skills and future-focused career opportunities.",
     image: "/images/about/about-hero-learning.svg",
     accent: "#059669",
   },
@@ -403,11 +403,9 @@ const About = () => {
       <section className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="text-xs font-semibold text-blue-600 tracking-[0.12em] uppercase mb-4 block">
-              What We Stand For
-            </span>
+           
             <h2 className="text-4xl font-bold text-gray-900 tracking-tight mb-4">
-              Our Core Values
+              Our  Values
             </h2>
             <p className="text-gray-500 max-w-md mx-auto">
               The principles that guide every decision, every product, every partnership.
@@ -430,13 +428,6 @@ const About = () => {
                   </div>
                   <h3 className="text-base font-bold text-gray-900 mb-2">{value.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed flex-1">{value.description}</p>
-
-                  <div className={`mt-6 pt-5 border-t ${value.borderColor}`}>
-                    <div className={`inline-flex items-center gap-1.5 text-xs font-semibold ${value.textColor}`}>
-                      <Zap className="w-3 h-3" />
-                      Core Principle
-                    </div>
-                  </div>
                 </div>
               );
             })}

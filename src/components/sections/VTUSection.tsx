@@ -112,33 +112,6 @@ const VTUSection = () => {
                   In partnership with Visvesvaraya Technological University, we're transforming education by bridging the gap between academia and industry through innovative programs.
                 </p>
 
-                {/* Feature List - Mini Cards */}
-                <div className="space-y-3 pt-2">
-                  {features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="group/feature flex items-start gap-4 p-4 rounded-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                      style={{
-                        background: "rgba(255, 255, 255, 0.6)",
-                        border: "1px solid rgba(4, 140, 228, 0.1)",
-                      }}
-                    >
-                      <div
-                        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 transition-transform duration-300 group-hover/feature:scale-110"
-                        style={{
-                          background: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-                          boxShadow: "0 4px 12px rgba(16, 185, 129, 0.3)",
-                        }}
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-sm lg:text-base text-gray-700 leading-relaxed font-medium">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   {/* Primary Button */}
