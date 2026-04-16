@@ -19,8 +19,19 @@ const SignIn = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
     
       
-      <div className="flex-1 flex items-center justify-center px-4 py-32">
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <a href="/" className="flex items-center">
+              <img
+                src="/edu_logo.svg"
+                alt="Edutainer"
+                className="h-12 w-auto"
+              />
+            </a>
+          </div>
+
           <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-10">
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">

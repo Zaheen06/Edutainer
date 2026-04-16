@@ -23,18 +23,18 @@ export const SectionHeader = ({
   return (
     <div className={`${alignClass} ${className}`}>
       {badge && (
-        <div className="mb-5">
+        <div className="mb-4 sm:mb-5">
           <SectionBadge variant={badgeVariant}>{badge}</SectionBadge>
         </div>
       )}
       <h2
-        className="text-3xl md:text-[2.6rem] font-bold text-gray-900 mb-4 leading-[1.1]"
+        className="text-2xl sm:text-3xl md:text-[2.6rem] font-bold text-gray-900 mb-3 sm:mb-4 leading-[1.1]"
         style={{ letterSpacing: "-0.025em" }}
       >
         {title}
       </h2>
       {description && (
-        <p className={`text-base text-gray-500 leading-[1.7] max-w-lg ${maxWidthClass}`}>
+        <p className={`text-sm sm:text-base text-gray-500 leading-[1.7] max-w-lg ${maxWidthClass}`}>
           {description}
         </p>
       )}

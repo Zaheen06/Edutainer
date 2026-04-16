@@ -28,8 +28,8 @@ const HeroSection = () => {
       className="relative overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #f5faff 0%, #e6f2ff 40%, #d6ebff 100%)",
-        paddingTop:    "clamp(4.5rem, 9vw, 6.5rem)",
-        paddingBottom: "clamp(3.5rem, 7vw, 5.5rem)",
+        paddingTop:    "clamp(3rem, 7vw, 6.5rem)",
+        paddingBottom: "clamp(2.5rem, 5vw, 5.5rem)",
       }}
     >
       {/* Layered radial glows */}
@@ -48,15 +48,15 @@ const HeroSection = () => {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 xl:gap-20 items-center">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 sm:gap-10 lg:gap-12 xl:gap-20 items-center">
 
           {/* ── LEFT ── */}
-          <div ref={leftRef} className="flex flex-col gap-7">
+          <div ref={leftRef} className="flex flex-col gap-5 sm:gap-6 lg:gap-7">
 
             {/* Heading */}
             <h1
               className="font-bold"
-              style={{ fontSize: "clamp(2.5rem, 5.5vw, 3.75rem)", letterSpacing: "-0.03em", lineHeight: 1.08, color: "#0B2545" }}
+              style={{ fontSize: "clamp(2rem, 5.5vw, 3.75rem)", letterSpacing: "-0.03em", lineHeight: 1.1, color: "#0B2545" }}
             >
               Learn Skills That
               <br />
@@ -80,7 +80,7 @@ const HeroSection = () => {
 
             {/* Accent underline */}
             <div
-              className="w-16 h-[3px] rounded-full -mt-3"
+              className="w-12 sm:w-16 h-[2.5px] sm:h-[3px] rounded-full -mt-2 sm:-mt-3"
               style={{
                 background: "linear-gradient(90deg, #048CE4, #0270C0)",
                 animation: "growLine 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s both",
@@ -88,18 +88,18 @@ const HeroSection = () => {
             />
 
             {/* Subtext */}
-            <p className="leading-[1.8] max-w-[430px]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#3D6B8E" }}>
+            <p className="leading-[1.7] sm:leading-[1.8] max-w-[430px]" style={{ fontSize: "clamp(14px, 1.5vw, 16px)", color: "#3D6B8E" }}>
               Industry-aligned courses, virtual internships, and expert mentorship built to launch real careers, not just certificates.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 items-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 items-stretch sm:items-center">
               <a
                 href="/#courses"
-                className="inline-flex items-center gap-2 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
                 style={{
-                  fontSize: 14,
-                  padding: "13px 24px",
+                  fontSize: "clamp(13px, 1.5vw, 14px)",
+                  padding: "12px 20px",
                   background: "linear-gradient(135deg, #048CE4 0%, #0270C0 100%)",
                   boxShadow: "0 4px 20px rgba(4,140,228,0.38)",
                 }}
@@ -109,10 +109,10 @@ const HeroSection = () => {
               </a>
 
               <button
-                className="inline-flex items-center gap-2.5 font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 group"
+                className="inline-flex items-center justify-center gap-2.5 font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 group"
                 style={{
-                  fontSize: 14,
-                  padding: "12px 20px",
+                  fontSize: "clamp(13px, 1.5vw, 14px)",
+                  padding: "11px 18px",
                   color: "#0B2545",
                   background: "rgba(255,255,255,0.85)",
                   backdropFilter: "blur(8px)",
@@ -123,7 +123,7 @@ const HeroSection = () => {
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(4,140,228,0.25)"; (e.currentTarget as HTMLElement).style.color = "#0B2545"; }}
               >
                 <span
-                  className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
+                  className="w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
                   style={{ background: "linear-gradient(135deg, #048CE4, #0270C0)" }}
                 >
                   <Play className="w-3 h-3 text-white fill-white ml-0.5" />
@@ -133,26 +133,26 @@ const HeroSection = () => {
             </div>
 
             {/* Trust row */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 text-xs sm:text-sm">
               <div className="flex items-center gap-1.5">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                    <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
                 <span className="text-xs font-bold" style={{ color: "#0B2545" }}>4.9</span>
                 <span className="text-xs font-medium" style={{ color: "#6B9AB8" }}>(2.4k reviews)</span>
               </div>
 
-              <div className="w-px h-4 hidden sm:block" style={{ backgroundColor: "rgba(4,140,228,0.2)" }} />
+              <div className="w-px h-3 sm:h-4 hidden sm:block" style={{ backgroundColor: "rgba(4,140,228,0.2)" }} />
 
               {[
                 { icon: Users,    label: "50K+ Learners" },
                 { icon: BookOpen, label: "15+ Courses"   },
                 { icon: Clock,    label: "24/7 Access"   },
               ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex items-center gap-1.5">
-                  <Icon className="w-3.5 h-3.5" style={{ color: "#048CE4" }} />
+                <div key={label} className="flex items-center gap-1 sm:gap-1.5">
+                  <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: "#048CE4" }} />
                   <span className="text-xs font-medium" style={{ color: "#3D6B8E" }}>{label}</span>
                 </div>
               ))}

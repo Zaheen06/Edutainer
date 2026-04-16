@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -23,14 +24,25 @@ const SignUp = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
-      <div className="flex-1 flex items-center justify-center px-4 py-32">
+      <div className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12 pt-[88px] sm:pt-[96px]">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-10">
-            <div className="mb-8 text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          {/* Logo */}
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <a href="/" className="flex items-center">
+              <img
+                src="/edu_logo.svg"
+                alt="Edutainer"
+                className="h-10 sm:h-12 w-auto"
+              />
+            </a>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+            <div className="mb-6 sm:mb-8 text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 Create your account
               </h2>
-              <p className="text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 Already have an account?{" "}
                 <Link to="/signin" className="text-blue-600 hover:text-blue-700 font-semibold">
                   Sign in
@@ -118,15 +130,15 @@ const SignUp = () => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
+                className="w-full h-11 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
               >
                 Create account
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </form>
 
             {/* Footer Links */}
-            <div className="mt-8 text-center text-sm text-gray-600">
+            <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-600">
               By creating an account, you agree to our{" "}
               <Link to="/terms" className="text-blue-600 hover:text-blue-700">
                 Terms of Service

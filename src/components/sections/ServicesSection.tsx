@@ -126,17 +126,17 @@ const ServicesSection = () => {
   const ActiveIcon = active.icon;
 
   return (
-    <section id="features" className="py-16 lg:py-24 bg-white">
+    <section id="features" className="py-12 sm:py-16 lg:py-24 bg-white">
       <div className="container-custom">
         <SectionHeader
           badge="What We Offer"
           title="Everything You Need to Succeed"
           description="Four pillars that make Edutainer the platform learners trust to launch and grow their careers."
-          className="mb-16"
+          className="mb-12 sm:mb-14 lg:mb-16"
         />
 
         {/* ── Tab Row ── */}
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
           <div
             className="flex items-end min-w-max md:min-w-0 md:justify-center border-b border-gray-200"
             role="tablist"
@@ -150,22 +150,22 @@ const ServicesSection = () => {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => handleTabClick(index)}
-                  className="relative flex items-center gap-2.5 px-6 py-4 text-sm font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none"
+                  className="relative flex items-center gap-2 sm:gap-2.5 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium transition-colors duration-200 whitespace-nowrap focus:outline-none"
                   style={{ color: isActive ? tab.accentColor : "#6B7280" }}
                 >
-                  <Icon className="w-4 h-4 flex-shrink-0" style={{ color: isActive ? tab.accentColor : "#9CA3AF" }} />
+                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" style={{ color: isActive ? tab.accentColor : "#9CA3AF" }} />
                   <span>{tab.label}</span>
 
                   {/* Track line — always visible, gray */}
                   <span
-                    className="absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full bg-gray-100"
+                    className="absolute bottom-0 left-0 right-0 h-[2.5px] sm:h-[3px] rounded-t-full bg-gray-100"
                   />
 
                   {/* Progress fill — only on active tab, keyed to restart */}
                   {isActive && (
                     <span
                       key={progressKey}
-                      className="absolute bottom-0 left-0 h-[3px] rounded-t-full"
+                      className="absolute bottom-0 left-0 h-[2.5px] sm:h-[3px] rounded-t-full"
                       style={{
                         background: tab.progressGradient,
                         animation: `tabProgress ${SLIDE_DURATION}ms linear forwards`,
@@ -180,7 +180,7 @@ const ServicesSection = () => {
 
         {/* Divider fade */}
         <div
-          className="h-px mb-10"
+          className="h-px mb-8 sm:mb-10"
           style={{
             background:
               "linear-gradient(to right, transparent, #E5E7EB 20%, #E5E7EB 80%, transparent)",
@@ -189,7 +189,7 @@ const ServicesSection = () => {
 
         {/* ── Content Panel ── */}
         <div
-          className="rounded-2xl overflow-hidden"
+          className="rounded-xl sm:rounded-2xl overflow-hidden"
           style={{
             backgroundColor: active.lightBg,
             boxShadow: "0 2px 20px rgba(0,0,0,0.05)",
@@ -205,48 +205,48 @@ const ServicesSection = () => {
             }}
           >
             {/* Left: text */}
-            <div className="p-10 lg:p-16 flex flex-col justify-center">
+            <div className="p-6 sm:p-8 lg:p-12 xl:p-16 flex flex-col justify-center">
               <div
-                className="flex items-center gap-2 mb-5"
+                className="flex items-center gap-2 mb-4 sm:mb-5"
                 style={{ color: active.accentColor }}
               >
-                <ActiveIcon className="w-5 h-5" />
-                <span className="text-xs font-bold uppercase tracking-widest">
+                <ActiveIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">
                   {active.label}
                 </span>
               </div>
 
               <h3
-                className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-5 leading-tight"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4 sm:mb-5 leading-tight"
                 style={{ letterSpacing: "-0.02em", whiteSpace: "pre-line" }}
               >
                 {active.heading}
               </h3>
 
-              <p className="text-base text-[#475569] leading-relaxed max-w-md">
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-md">
                 {active.description}
               </p>
             </div>
 
             {/* Right: stats */}
             <div
-              className="p-10 lg:p-16 flex flex-col justify-center gap-8 border-t md:border-t-0 md:border-l"
+              className="p-6 sm:p-8 lg:p-12 xl:p-16 flex flex-col justify-center gap-6 sm:gap-8 border-t md:border-t-0 md:border-l"
               style={{ borderColor: active.lightAccent }}
             >
               {active.stats.map((stat) => (
-                <div key={stat.label} className="flex items-start gap-5">
+                <div key={stat.label} className="flex items-start gap-4 sm:gap-5">
                   <div
-                    className="w-1 h-10 rounded-full flex-shrink-0 mt-0.5"
+                    className="w-1 h-8 sm:h-10 rounded-full flex-shrink-0 mt-0.5"
                     style={{ backgroundColor: active.accentColor, opacity: 0.35 }}
                   />
                   <div>
                     <div
-                      className="text-3xl font-bold leading-none tracking-tight mb-1"
+                      className="text-2xl sm:text-3xl font-bold leading-none tracking-tight mb-1"
                       style={{ color: active.accentColor, letterSpacing: "-0.02em" }}
                     >
                       {stat.value}
                     </div>
-                    <div className="text-sm font-medium text-[#6B7280]">
+                    <div className="text-xs sm:text-sm font-medium text-[#6B7280]">
                       {stat.label}
                     </div>
                   </div>

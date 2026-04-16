@@ -40,15 +40,15 @@ export const StatCard = ({
 
   return (
     <div
-      className={`relative bg-white rounded-2xl p-7 border ${styles.border} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden ${className}`}
+      className={`relative bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-7 border ${styles.border} hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden ${className}`}
     >
-      <div className={`absolute top-0 left-0 right-0 h-[3px] ${styles.bar} rounded-t-2xl`} />
-      <div className={`text-4xl font-bold tracking-tight mb-2 ${styles.num}`}>
+      <div className={`absolute top-0 left-0 right-0 h-[2.5px] sm:h-[3px] ${styles.bar} rounded-t-xl sm:rounded-t-2xl`} />
+      <div className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${styles.num}`}>
         {value}
       </div>
-      <div className="text-sm font-semibold text-gray-900 mb-3">{label}</div>
+      <div className="text-xs sm:text-sm font-semibold text-gray-900 mb-2 sm:mb-3">{label}</div>
       {description && (
-        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+        <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">{description}</p>
       )}
     </div>
   );

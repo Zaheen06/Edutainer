@@ -152,7 +152,7 @@ const StoryRow = ({ phase, index }: { phase: typeof storyPhases[0]; index: numbe
   return (
     <div
       ref={rowRef}
-      className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+      className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center"
     >
       {/* ── Image ── */}
       <div className={`zz-img ${isImageLeft ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
@@ -186,28 +186,28 @@ const StoryRow = ({ phase, index }: { phase: typeof storyPhases[0]; index: numbe
       </div>
 
       {/* ── Text ── */}
-      <div className={`zz-txt ${isImageLeft ? "lg:order-2" : "lg:order-1"} flex flex-col gap-5`}>
+      <div className={`zz-txt ${isImageLeft ? "lg:order-2" : "lg:order-1"} flex flex-col gap-4 sm:gap-5`}>
         {/* Vertical accent line */}
-        <div className="w-8 h-[2px] rounded-full" style={{ backgroundColor: phase.accent }} />
+        <div className="w-6 sm:w-8 h-[2px] rounded-full" style={{ backgroundColor: phase.accent }} />
 
         {/* Heading */}
         <h3
-          className="text-[1.75rem] lg:text-[2rem] font-bold text-gray-900 leading-[1.2]"
+          className="text-xl sm:text-2xl lg:text-[2rem] font-bold text-gray-900 leading-[1.2]"
           style={{ letterSpacing: "-0.025em" }}
         >
           {phase.title}
         </h3>
 
         {/* Body */}
-        <p className="text-[15px] text-gray-500 leading-[1.8]">{phase.para1}</p>
-        <p className="text-[15px] text-gray-400 leading-[1.8]">{phase.para2}</p>
+        <p className="text-sm sm:text-[15px] text-gray-500 leading-[1.7] sm:leading-[1.8]">{phase.para1}</p>
+        <p className="text-sm sm:text-[15px] text-gray-400 leading-[1.7] sm:leading-[1.8]">{phase.para2}</p>
       </div>
     </div>
   );
 };
 
 const StorySection = () => (
-  <section className="relative py-24 bg-white overflow-hidden">
+  <section className="relative py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
 
     {/* Single very subtle background wash — no noise */}
     <div
@@ -218,9 +218,9 @@ const StorySection = () => (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {/* Section header */}
-      <div className="mb-20 max-w-xl">
+      <div className="mb-12 sm:mb-16 lg:mb-20 max-w-xl">
         <h2
-          className="text-5xl lg:text-[3.5rem] font-bold text-gray-900 leading-[1.1] mb-2"
+          className="text-3xl sm:text-4xl lg:text-[3.5rem] font-bold text-gray-900 leading-[1.1] mb-2"
           style={{ letterSpacing: "-0.025em" }}
         >
           Our Story
@@ -228,7 +228,7 @@ const StorySection = () => (
       </div>
 
       {/* Rows */}
-      <div className="flex flex-col gap-24 lg:gap-32">
+      <div className="flex flex-col gap-16 sm:gap-20 lg:gap-24 xl:gap-32">
         {storyPhases.map((phase, i) => (
           <StoryRow key={phase.id} phase={phase} index={i} />
         ))}
@@ -256,17 +256,18 @@ const About = () => {
     <div className="min-h-screen bg-white">
       <Navbar />
 
+      <div className="pt-[72px]">
 
 
       {/* ══════════════════════════════════════
           VISION & MISSION — Zig-zag layout
       ══════════════════════════════════════ */}
-      <section className="py-28 bg-white">
+      <section className="py-16 sm:py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="space-y-24">
+          <div className="space-y-16 sm:space-y-20 lg:space-y-24">
             {/* Vision — image left, text right */}
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
               <div className="relative group">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                   <img
@@ -284,10 +285,10 @@ const About = () => {
                   <Target className="w-3.5 h-3.5" />
                   Our Vision
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-5 leading-tight tracking-tight">
                   A Transformative Educational Ecosystem
                 </h3>
-                <p className="text-gray-500 leading-relaxed mb-8">
+                <p className="text-sm sm:text-base text-gray-500 leading-relaxed mb-6 sm:mb-8">
                  To build a transformative and future-ready educational ecosystem where innovation meets
                  opportunity, empowering learners from all backgrounds to unlock their full potential. 
                  We envision education as a catalyst for creativity, critical thinking, and real-world 
@@ -315,10 +316,10 @@ const About = () => {
                   <Rocket className="w-3.5 h-3.5" />
                   Our Mission
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-5 leading-tight tracking-tight">
                   Bridging Learning and Modern Technology
                 </h3>
-                <p className="text-gray-500 leading-relaxed mb-8">
+                <p className="text-sm sm:text-base text-gray-500 leading-relaxed mb-6 sm:mb-8">
                  To bridge the gap between conventional learning and modern technology by transforming traditional education into a more accessible, engaging, 
                  and future-focused experience. We are committed to delivering simplified, interactive, and industry-relevant educational solutions that equip 
                  learners with practical skills and real-world knowledge.
@@ -356,15 +357,15 @@ const About = () => {
       {/* ══════════════════════════════════════
           OUR IMPACT — After Mission
       ══════════════════════════════════════ */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight" style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
+          <div className="mb-8 sm:mb-10 lg:mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight" style={{ fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
               Our Impact
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             <StatCard
               value="50K+"
               label="Learners Empowered"
@@ -400,19 +401,19 @@ const About = () => {
       {/* ══════════════════════════════════════
           CORE VALUES — 4-column icon cards
       ══════════════════════════════════════ */}
-      <section className="py-28 bg-white">
+      <section className="py-16 sm:py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10 sm:mb-12 lg:mb-14">
            
-            <h2 className="text-4xl font-bold text-gray-900 tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-3 sm:mb-4">
               Our  Values
             </h2>
-            <p className="text-gray-500 max-w-md mx-auto">
+            <p className="text-sm sm:text-base text-gray-500 max-w-md mx-auto">
               The principles that guide every decision, every product, every partnership.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {values.map((value) => {
               const Icon = value.icon;
               return (
@@ -438,6 +439,8 @@ const About = () => {
 
 
       <Footer />
+
+      </div>
 
       <style>{`
         @keyframes fadeSlideIn {

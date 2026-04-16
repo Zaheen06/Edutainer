@@ -4,6 +4,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,17 +55,28 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Navbar />
       
-      
-      <div className="flex-1 flex items-center justify-center px-4 py-32">
+      <div className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12 pt-[88px] sm:pt-[96px]">
         <div className="w-full max-w-xl">
-          <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-10">
+          {/* Logo */}
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <a href="/" className="flex items-center">
+              <img
+                src="/edu_logo.svg"
+                alt="Edutainer"
+                className="h-10 sm:h-12 w-auto"
+              />
+            </a>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
             {/* Header */}
-            <div className="mb-10">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <div className="mb-8 sm:mb-10">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 Create your account
               </h1>
-              <p className="text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 Start your journey with curated editorial learning.
               </p>
             </div>
@@ -90,7 +103,7 @@ const Register = () => {
                 <Label htmlFor="email" className="text-sm font-medium text-gray-700">
                   Email Address
                 </Label>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Input
                     id="email"
                     type="email"
@@ -105,7 +118,7 @@ const Register = () => {
                     type="button"
                     onClick={handleSendOTP}
                     disabled={!formData.email || emailVerified}
-                    className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium"
+                    className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium whitespace-nowrap"
                   >
                     Send OTP
                   </Button>
@@ -118,7 +131,7 @@ const Register = () => {
                   <Label htmlFor="otp" className="text-sm font-medium text-gray-700">
                     OTP
                   </Label>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <Input
                       id="otp"
                       type="text"
@@ -133,7 +146,7 @@ const Register = () => {
                       type="button"
                       onClick={handleVerifyOTP}
                       disabled={!formData.otp}
-                      className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium"
+                      className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium whitespace-nowrap"
                     >
                       Verify
                     </Button>
@@ -247,7 +260,7 @@ const Register = () => {
             </form>
 
             {/* Sign In Link */}
-            <div className="mt-8 text-center text-sm text-gray-600">
+            <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-600">
               Already have an account?{" "}
               <Link to="/signin" className="text-blue-600 hover:text-blue-700 font-semibold">
                 Sign In
@@ -257,7 +270,7 @@ const Register = () => {
         </div>
       </div>
 
-      
+      <Footer />
     </div>
   );
 };

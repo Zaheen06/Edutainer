@@ -28,12 +28,12 @@ const Footer = () => {
         borderTop: "1px solid #E2E8F0",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-12">
 
           {/* Brand */}
           <motion.div
-            className="lg:col-span-2 space-y-4"
+            className="sm:col-span-2 lg:col-span-2 space-y-4"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -44,10 +44,10 @@ const Footer = () => {
               <img
                 src="/edu_logo.svg"
                 alt="Edutainer"
-                className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
+                className="h-7 sm:h-8 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </a>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
+            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed max-w-xs">
               Reshaping Learning for the Modern World, where Education Meets Accessibility and Inclusivity.
             </p>
           </motion.div>
@@ -109,19 +109,17 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <motion.div
-          className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="pt-6 sm:pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 text-center sm:text-left">
             © {currentYear} Edutainer. All rights reserved.
           </p>
-          <p className="text-xs text-gray-400">
-            Built to empower learners worldwide.
-          </p>
+          
         </motion.div>
       </div>
     </footer>

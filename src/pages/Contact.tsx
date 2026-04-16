@@ -7,6 +7,8 @@ import { ContactCard } from "@/components/common";
 const MAPS_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0334511092256!2d77.60034657584461!3d12.905570587403718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15ef6f6a196b%3A0xe51df8654f6bff1f!2sEdutainer!5e0!3m2!1sen!2sin!4v1772610709359!5m2!1sen!2sin";
 
+const PLACE_ID = "ChIJaxlqb-8VrjsRH_9rT2X4HeU";
+
 const Contact = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
@@ -32,57 +34,57 @@ const Contact = () => {
       <Navbar />
 
       {/* ══════════════════════════════════════
-          MAIN — Map (60%) + Info cards (40%)
+          MAIN — Map + Info cards (Balanced Layout)
       ══════════════════════════════════════ */}
       <section className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-[1fr_400px] gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
 
-          {/* ── LEFT: Map ── */}
+          {/* ── LEFT: Compact Map Card ── */}
           <div
-            className="fade-in group rounded-[20px] overflow-hidden"
+            className="fade-in group rounded-2xl overflow-hidden bg-white"
             style={{
-              boxShadow: "0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(4,140,228,0.1)",
-              border: "1px solid rgba(4,140,228,0.12)",
-              transition: "box-shadow 0.3s ease",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(4,140,228,0.08)",
+              border: "1px solid rgba(4,140,228,0.1)",
+              transition: "box-shadow 0.3s ease, transform 0.3s ease",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.boxShadow =
-                "0 8px 12px rgba(0,0,0,0.06), 0 32px 80px rgba(4,140,228,0.18), 0 0 0 2px rgba(4,140,228,0.2)";
+                "0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(4,140,228,0.12)";
+              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.boxShadow =
-                "0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(4,140,228,0.1)";
+                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(4,140,228,0.08)";
+              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}
           >
             {/* Map header */}
-            <div
-              className="px-6 py-5 flex items-center justify-between"
-              style={{ background: "linear-gradient(135deg,#f0f7ff,#ffffff)", borderBottom: "1px solid #EEF2FF" }}
-            >
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#048CE4] mb-0.5">Our Office</p>
-                <p className="text-sm font-semibold text-gray-900">Edutainer, BTM Layout 2nd Stage</p>
-                <p className="text-xs text-gray-400 mt-0.5">110, 7th Cross Rd, Dollar Layout, Bengaluru 560076</p>
+            <div className="px-6 py-5 border-b border-gray-100">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#048CE4] mb-2">Discover Our Workspace</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    We'd love to meet you in person! Drop by our office to explore how Edutainer is transforming education through innovation and technology. Our team is happy to guide you and answer your questions.
+                  </p>
+                  <p className="text-xs text-gray-500 mt-3 font-medium">110, 7th Cross Rd, BTM Layout, Bengaluru 560076</p>
+                </div>
+                <a
+                  href="https://maps.google.com/?q=Edutainer,BTM+Layout,Bengaluru"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-xs font-semibold text-[#048CE4] hover:text-[#0270C0] transition-colors flex-shrink-0 whitespace-nowrap"
+                >
+                  Directions <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
               </div>
-              <a
-                href="https://maps.google.com/?q=Edutainer,BTM+Layout,Bengaluru"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs font-semibold text-[#048CE4] hover:underline flex-shrink-0 ml-4"
-              >
-                Directions <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
             </div>
 
-            {/* Map iframe */}
-            <div className="overflow-hidden" style={{ transition: "transform 0.4s ease" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1.01)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}
-            >
+            {/* Map with Reviews */}
+            <div className="overflow-hidden">
               <iframe
                 src={MAPS_EMBED}
                 width="100%"
-                height="420"
+                height="380"
                 style={{ border: 0, display: "block" }}
                 allowFullScreen
                 loading="lazy"
@@ -91,17 +93,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Map footer */}
-            <div
-              className="px-6 py-4 flex items-center justify-between"
-              style={{ background: "#fff", borderTop: "1px solid #EEF2FF" }}
-            >
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
-                <span className="text-xs font-medium text-gray-500">Open today · 9:00 am – 6:00 pm IST</span>
-              </div>
-              <span className="text-xs text-gray-400">Karnataka 560076</span>
-            </div>
           </div>
 
           {/* ── RIGHT: Contact info cards ── */}
