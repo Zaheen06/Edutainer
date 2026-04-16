@@ -43,12 +43,9 @@ const Navbar = () => {
         }`}
         style={{
           backgroundColor: dark ? "#0F172A" : "#FFFFFF",
-          borderBottom: dark 
-            ? "1px solid rgba(51, 65, 85, 0.9)" 
-            : "1px solid rgba(226, 232, 240, 0.8)",
           boxShadow: scrolled 
             ? (dark ? "0 2px 32px rgba(0,0,0,0.5)" : "0 1px 24px rgba(0,0,0,0.06)")
-            : (dark ? "0 1px 16px rgba(0,0,0,0.3)" : "0 1px 8px rgba(0,0,0,0.03)"),
+            : "none",
           paddingTop: scrolled ? "10px" : "14px",
           paddingBottom: scrolled ? "10px" : "14px",
           paddingLeft: "16px",

@@ -25,11 +25,11 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden min-h-screen flex items-center"
       style={{
         background: "linear-gradient(135deg, #f5faff 0%, #e6f2ff 40%, #d6ebff 100%)",
-        paddingTop:    "clamp(3rem, 7vw, 6.5rem)",
-        paddingBottom: "clamp(2.5rem, 5vw, 5.5rem)",
+        paddingTop:    "calc(72px + 2rem)",
+        paddingBottom: "3rem",
       }}
     >
       {/* Layered radial glows */}
