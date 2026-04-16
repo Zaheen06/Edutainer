@@ -258,6 +258,65 @@ const About = () => {
 
       <div className="pt-[72px]">
 
+      {/* ══════════════════════════════════════
+          ABOUT US — Clean Professional Layout
+      ══════════════════════════════════════ */}
+      <section className="py-20 sm:py-24 lg:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left: Text Content */}
+            <div className="space-y-6">
+              {/* Section Label */}
+              <div className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                About Us
+              </div>
+
+              {/* Heading */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Transforming Education for a Digital Future
+              </h1>
+
+              {/* Description */}
+              <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed">
+                <p>
+                  Since 2018, we've been on a mission to bridge the gap between traditional learning and modern technology. 
+                  We empower over 50,000+ learners with accessible, engaging, and industry-relevant education that transforms careers and lives.
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-6">
+                <div>
+                  <div className="text-3xl font-bold text-gray-900">50K+</div>
+                  <div className="text-sm text-gray-600 mt-1">Learners</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-gray-900">15+</div>
+                  <div className="text-sm text-gray-600 mt-1">Programs</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-gray-900">90%</div>
+                  <div className="text-sm text-gray-600 mt-1">Success Rate</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Image */}
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="/images/about/about-hero-learning.svg"
+                  alt="About Edutainer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
 
       {/* ══════════════════════════════════════
           VISION & MISSION — Zig-zag layout
