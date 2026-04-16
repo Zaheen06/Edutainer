@@ -171,9 +171,9 @@ const CoursesSection = () => {
               className={`px-5 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
                 activeCategory === cat
                   ? "text-white"
-                  : "bg-[#F1F5F9] text-[#475569] hover:bg-[#E0F2FE] hover:text-[#048CE4]"
+                  : "bg-gray-100 text-gray-700 hover:text-white"
               }`}
-              style={activeCategory === cat ? { background: "linear-gradient(135deg, #048CE4, #0454AC)" } : {}}
+              style={activeCategory === cat ? { background: "linear-gradient(135deg, #048CE4, #0454AC)" } : { ':hover': { background: "linear-gradient(135deg, #048CE4, #0454AC)" } }}
             >
               {cat}
             </button>
@@ -189,10 +189,13 @@ const CoursesSection = () => {
             aria-label="Previous courses"
             className={`hidden md:flex w-11 h-11 items-center justify-center rounded-full border bg-white transition-all duration-200 flex-shrink-0 ${
               page === 0 || isAnimating
-                ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
-                : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB] shadow-sm hover:shadow-md"
+                ? "opacity-30 cursor-not-allowed border-gray-200"
+                : "border-gray-200 hover:shadow-md"
             }`}
-            style={{ boxShadow: page === 0 ? 'none' : '0 1px 3px rgba(0,0,0,0.06)' }}
+            style={{ 
+              boxShadow: page === 0 ? 'none' : '0 1px 3px rgba(0,0,0,0.06)',
+              ...(page !== 0 && !isAnimating ? { ':hover': { borderColor: '#048CE4', backgroundColor: '#E6F4FC', color: '#048CE4' } } : {})
+            }}
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -211,7 +214,7 @@ const CoursesSection = () => {
             {visible.map((course) => (
               <div
                 key={course.title}
-                className="bg-white rounded-xl border border-[#E8EFF6] overflow-hidden group cursor-pointer flex flex-col"
+                className="bg-white rounded-xl border border-gray-200 overflow-hidden group cursor-pointer flex flex-col"
                 style={{
                   boxShadow: "0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(4,140,228,0.06)",
                   transition: "all 0.22s ease",
@@ -309,8 +312,8 @@ const CoursesSection = () => {
             aria-label="Next courses"
             className={`hidden md:flex w-11 h-11 items-center justify-center rounded-full border bg-white transition-all duration-200 flex-shrink-0 ${
               page >= totalPages - 1 || isAnimating
-                ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
-                : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB] shadow-sm hover:shadow-md"
+                ? "opacity-30 cursor-not-allowed border-gray-200"
+                : "border-gray-200 hover:shadow-md"
             }`}
             style={{ boxShadow: page >= totalPages - 1 ? 'none' : '0 1px 3px rgba(0,0,0,0.06)' }}
           >
@@ -326,8 +329,8 @@ const CoursesSection = () => {
             aria-label="Previous courses"
             className={`w-11 h-11 flex items-center justify-center rounded-full border bg-white transition-all duration-200 ${
               page === 0 || isAnimating
-                ? "opacity-30 cursor-not-allowed border-[#E2E8F0]"
-                : "border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] hover:text-[#2563EB]"
+                ? "opacity-30 cursor-not-allowed border-gray-200"
+                : "border-gray-200"
             }`}
             style={{ boxShadow: page === 0 ? 'none' : '0 1px 3px rgba(0,0,0,0.06)' }}
           >

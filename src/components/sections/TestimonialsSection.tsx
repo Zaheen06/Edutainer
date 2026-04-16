@@ -58,24 +58,24 @@ const TestimonialsSection = () => {
             >
               {/* Quote icon + Stars */}
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-full bg-[#DBEAFE] flex items-center justify-center flex-shrink-0">
-                  <Quote className="w-5 h-5 text-[#2563EB]" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#E6F4FC' }}>
+                  <Quote className="w-5 h-5" style={{ color: '#048CE4' }} />
                 </div>
                 <div className="flex items-center gap-0.5">
                   {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-[#F59E0B] fill-[#F59E0B]" />
+                    <Star key={i} className="w-4 h-4" style={{ color: '#048CE4', fill: '#048CE4' }} />
                   ))}
                 </div>
               </div>
 
               {/* Review Text */}
-              <p className="text-sm text-[#64748B] leading-relaxed line-clamp-5 flex-1">
+              <p className="text-sm text-gray-600 leading-relaxed line-clamp-5 flex-1">
                 "{t.text}"
               </p>
-              <a href="#" className="text-sm text-[#2563EB] font-medium hover:underline">Read more</a>
+              <a href="#" className="text-sm font-medium hover:underline" style={{ color: '#048CE4' }}>Read more</a>
 
               {/* Divider */}
-              <div className="border-t border-[#E2E8F0]" />
+              <div className="border-t border-gray-200" />
 
               {/* Author */}
               <div className="flex items-center gap-3">
