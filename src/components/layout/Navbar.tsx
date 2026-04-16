@@ -4,8 +4,8 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled]     = useState(false);
-  const [dark, setDark]             = useState(() => {
+  const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark" ||
       (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
@@ -30,49 +30,47 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    { label: "Courses",    href: "/#courses" },
-    { label: "About Us",   href: "/about"    },
-    { label: "Contact Us", href: "/contact"  },
+    { label: "Courses", href: "/#courses" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ${
-        dark ? 'navbar-dark' : 'navbar-light'
-      }`}
-      style={{
-        background: dark 
-          ? "rgba(15, 23, 42, 0.98)" 
-          : "rgba(255, 255, 255, 0.98)",
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        borderBottom: dark 
-          ? "1px solid rgba(51, 65, 85, 0.9)" 
-          : "1px solid rgba(226, 232, 240, 0.8)",
-        boxShadow: scrolled 
-          ? (dark ? "0 2px 32px rgba(0,0,0,0.5)" : "0 1px 24px rgba(0,0,0,0.06)")
-          : (dark ? "0 1px 16px rgba(0,0,0,0.3)" : "0 1px 8px rgba(0,0,0,0.03)"),
-        padding: scrolled ? "10px 0" : "14px 0",
-        paddingTop: `max(${scrolled ? '10px' : '14px'}, env(safe-area-inset-top))`,
-      }}
-    >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between w-full">
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 w-full z-[9999] transition-all duration-300 ${
+          dark ? 'navbar-dark' : 'navbar-light'
+        }`}
+        style={{
+          backgroundColor: dark ? "#0F172A" : "#FFFFFF",
+          borderBottom: dark 
+            ? "1px solid rgba(51, 65, 85, 0.9)" 
+            : "1px solid rgba(226, 232, 240, 0.8)",
+          boxShadow: scrolled 
+            ? (dark ? "0 2px 32px rgba(0,0,0,0.5)" : "0 1px 24px rgba(0,0,0,0.06)")
+            : (dark ? "0 1px 16px rgba(0,0,0,0.3)" : "0 1px 8px rgba(0,0,0,0.03)"),
+          paddingTop: scrolled ? "10px" : "14px",
+          paddingBottom: scrolled ? "10px" : "14px",
+          paddingLeft: "16px",
+          paddingRight: "16px",
+        }}
+      >
+        <div className="w-full max-w-7xl mx-auto relative flex items-center justify-between gap-4">
 
           {/* Logo */}
-          <a href="/" className="flex items-center group flex-shrink-0">
+          <a href="/" className="flex items-center group flex-shrink-0 min-w-fit">
             <img
               src="/edu_logo.svg"
               alt="Edutainer"
-              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-7 sm:h-8 w-auto"
               style={{
                 filter: dark ? "brightness(1.2) contrast(1.1)" : "none",
               }}
             />
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop nav - Centered */}
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {links.map((link) => (
               <a
                 key={link.label}
@@ -95,7 +93,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 flex-shrink-0">
             {/* Dark mode toggle */}
             <ThemeToggle isDark={dark} onToggle={() => setDark(!dark)} />
 
@@ -131,26 +129,10 @@ const Navbar = () => {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 rounded-lg transition-all duration-200 relative z-[101]"
+            className="md:hidden p-2 rounded-lg transition-all duration-200 flex-shrink-0 ml-auto"
             style={{
-              color: dark ? "#F1F5F9" : "#4B5563",
-              backgroundColor: dark ? "rgba(51, 65, 85, 0.3)" : "transparent",
-            }}
-            onTouchStart={(e) => {
-              e.currentTarget.style.color = "#048CE4";
-              e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.6)" : "rgba(239, 246, 255, 0.8)";
-            }}
-            onTouchEnd={(e) => {
-              e.currentTarget.style.color = dark ? "#F1F5F9" : "#4B5563";
-              e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.3)" : "transparent";
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "#048CE4";
-              e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.6)" : "rgba(239, 246, 255, 0.8)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = dark ? "#F1F5F9" : "#4B5563";
-              e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.3)" : "transparent";
+              color: dark ? "#F1F5F9" : "#1F2937",
+              backgroundColor: dark ? "rgba(51, 65, 85, 0.3)" : "rgba(243, 244, 246, 0.5)",
             }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
@@ -158,12 +140,12 @@ const Navbar = () => {
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="md:hidden fixed inset-0 backdrop-blur-sm z-[90]"
+          className="md:hidden fixed inset-0 backdrop-blur-sm z-[9998]"
           style={{ 
             top: 0,
             backgroundColor: dark ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0.4)",
@@ -174,7 +156,7 @@ const Navbar = () => {
 
       {/* Mobile drawer */}
       <div
-        className={`md:hidden fixed inset-y-0 right-0 w-72 shadow-2xl transition-transform duration-300 ease-in-out z-[95] ${
+        className={`md:hidden fixed inset-y-0 right-0 w-72 shadow-2xl transition-transform duration-300 ease-in-out z-[9998] ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         } ${dark ? 'mobile-drawer-dark' : 'mobile-drawer-light'}`}
         style={{ 
@@ -192,22 +174,6 @@ const Navbar = () => {
                 className="block px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200"
                 style={{
                   color: dark ? "#F1F5F9" : "#374151",
-                }}
-                onTouchStart={(e) => {
-                  e.currentTarget.style.color = "#048CE4";
-                  e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.5)" : "rgba(239, 246, 255, 0.8)";
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.style.color = dark ? "#F1F5F9" : "#374151";
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#048CE4";
-                  e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.5)" : "rgba(239, 246, 255, 0.8)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = dark ? "#F1F5F9" : "#374151";
-                  e.currentTarget.style.backgroundColor = "transparent";
                 }}
                 onClick={() => setMobileOpen(false)}
               >
@@ -229,22 +195,6 @@ const Navbar = () => {
                 style={{
                   color: dark ? "#F1F5F9" : "#374151",
                 }}
-                onTouchStart={(e) => {
-                  e.currentTarget.style.color = "#048CE4";
-                  e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.5)" : "rgba(239, 246, 255, 0.8)";
-                }}
-                onTouchEnd={(e) => {
-                  e.currentTarget.style.color = dark ? "#F1F5F9" : "#374151";
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#048CE4";
-                  e.currentTarget.style.backgroundColor = dark ? "rgba(51, 65, 85, 0.5)" : "rgba(239, 246, 255, 0.8)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = dark ? "#F1F5F9" : "#374151";
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
                 onClick={() => setMobileOpen(false)}
               >
                 Sign In
@@ -261,7 +211,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
